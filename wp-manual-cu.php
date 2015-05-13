@@ -14,48 +14,79 @@ add_action('admin_menu', 'mcu_add_pages');
 // action function for above hook
 function mcu_add_pages() {
     // Add a new submenu under Settings:
-	add_options_page('Manual Content Units', 'Manage Content Units', 'manage_options', 'testsettings', 'mcu_settings_page');
+	add_options_page('Manual Content Units', 'Manage Content Units', 'manage_options', 'mcu_settings', 'mcu_settings_page');
 
 
 }
 //settings page
 function mcu_settings_page() {
 
+
+	//var_dump($_POST);
+
+	foreach ($_POST as $key => $value) {
+		if ($key != 'submit'){
+			update_option('wp-manual-cu-'.$key, $value, TRUE);
+		}
+
+	}
+
+
+	$desktopTop = get_option( 'wp-manual-cu-desktop-top', true );
+	$desktopMiddle = get_option( 'wp-manual-cu-desktop-middle', true );
+	$desktopBottom = get_option( 'wp-manual-cu-desktop-bottom', true );
+
+	$tabletTop = get_option( 'wp-manual-cu-tablet-top', true );
+	$tabletMiddle = get_option( 'wp-manual-cu-tablet-middle', true );
+	$tabletBottom = get_option( 'wp-manual-cu-tablet-bottom', true );
+
+	$mobileTop = get_option( 'wp-manual-cu-mobile-top', true );
+	$mobileMiddle = get_option( 'wp-manual-cu-mobile-middle', true );
+	$mobileBottom = get_option( 'wp-manual-cu-mobile-bottom', true );
+
 	wp_enqueue_style( 'AdminBootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', array(), '', 'all' );
-	?>
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
+	
+		$form = "
+	<div class='container'>
+		<div class='row'>
+			<div class='col-xs-12'>
 				<h2>Manage Content Units</h2>
 			</div>
-			<div class="col-sm-4">
+			<form method='post' action=''> 
+			<div class='col-sm-4'>
 				<label>Top Content Units</label>
-				<br />
-				<input type="text" class="form-control form-group" placeholder="Desktop (930x180) Top" />
-				<input type="text" class="form-control form-group" placeholder="Tablet (728x90) Top" />
-				<input type="text" class="form-control form-group" placeholder="Mobile (320x300) Top" />
+				<br /> 
+				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Top' value='$desktopTop' name='desktop-top' />
+				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Top' value='$tabletTop' name='tablet-top' />
+				<input type='text' class='form-control form-group' placeholder='Mobile (320x300) Top' value='$mobileTop' name='mobile-top' />
 			</div>
-			<div class="col-sm-4">
+			<div class='col-sm-4'>
 				<label>Middle Content Units</label>
 				<br />
-				<input type="text" class="form-control form-group" placeholder="Desktop (930x180) Midt" />
-				<input type="text" class="form-control form-group" placeholder="Tablet (728x90) Midt" />
-				<input type="text" class="form-control" placeholder="Mobile (320x300) Midt" />
+				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Midt' value='$desktopMiddle' name='desktop-middle' />
+				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Midt' value='$tabletMiddle' name='tablet-middle' />
+				<input type='text' class='form-control' placeholder='Mobile (320x300) Midt' value='$mobileMiddle' name='mobile-middle' />
 			</div>
-			<div class="col-sm-4">
+			<div class='col-sm-4'>
 				<label>Bottom Content Units</label>
 				<br />
-				<input type="text" class="form-control form-group" placeholder="Desktop (930x180) Bottom" />
-				<input type="text" class="form-control form-group" placeholder="Tablet (728x90) Bottom" />
-				<input type="text" class="form-control form-group" placeholder="Mobile (320x300) Bottom" />
+				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Bottom' value='$desktopBottom' name='desktop-bottom'  />
+				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Bottom' value='$tabletBottom' name='tablet-bottom' />
+				<input type='text' class='form-control form-group' placeholder='Mobile (320x300) Bottom' value='$mobileBottom' name='mobile-bottom' />
 			</div>
-			<div class="col-xs-12">
+			<div class='col-xs-12'>
+				
 				<hr />
-				<input type="submit" class="btn btn-primary pull-right" value="Save">
+				<input type='submit' name='submit' value='Save' />
+				 
 			</div>
+			</form>
 		</div>
 	</div>
-	<?php
+	";
+
+	echo $form;
+	echo get_option( 'wp-manual-cu-desktop-top', true );
 }
 
 /*
