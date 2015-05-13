@@ -3,13 +3,47 @@
 Plugin Name: WordPress Manual Content Units
 Plugin URI: https://github.com/BenjaminMedia/wp-manual-cu
 Description: a plugin that allows you to manually add Specific Content Units to WordPress
-Author: Frederik Rabøl
+Author: Frederik Rabøl & Alf Henderson
 Version: 0.5
 Author URI: http://rabol.co
 */
 
 // Hook for adding admin menus
 add_action('admin_menu', 'mcu_add_pages');
+add_action('wp_footer', 'mcu_add_footer_scripts');
+
+add_action(get_option( 'wp-manual-cu-theme-hook', 'alienship_post_after'), 'mcu_add_banner_scripts');
+
+
+function mcu_add_banner_scripts() {
+
+
+	$desktopMiddle = get_option( 'wp-manual-cu-desktop-middle', true );
+	$tabletMiddle = get_option( 'wp-manual-cu-tablet-middle', true );
+	$mobileMiddle = get_option( 'wp-manual-cu-mobile-middle', true );
+
+
+			
+
+	$output =" 
+			<div class='banner mcu-test visible-md-lg'>
+			<!-- 'Blog_Acie_930x180_Midt' (section 'Stylista.dk - Bloggere') -->
+			<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+				</div>
+				<div class='banner visible-sm'>
+			<!-- 'Blog_Acie_tablet_728x90_midt' (section 'Stylista.dk - Bloggere') -->
+			<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+				</div>
+				<div class='banner visible-xs'>
+			<!-- 'Blog_Acie_mobil_320x300_midt' (section 'Stylista.dk - Bloggere') -->
+			<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+				</div>
+				<div class='clearfix'></div>
+			</div>
+	";
+
+	echo $output;
+}
 
 // action function for above hook
 function mcu_add_pages() {
@@ -18,11 +52,15 @@ function mcu_add_pages() {
 
 
 }
+
 //settings page
 function mcu_settings_page() {
 
 
-	//var_dump($_POST);
+	if (count($_POST) >= 1) {
+		echo"<div class='updated'> <p>Updated settings</p></div>"; 
+		
+	}
 
 	foreach ($_POST as $key => $value) {
 		if ($key != 'submit'){
@@ -32,17 +70,12 @@ function mcu_settings_page() {
 	}
 
 
-	$desktopTop = get_option( 'wp-manual-cu-desktop-top', true );
+	$themeHook = get_option( 'wp-manual-cu-theme-hook', true );
 	$desktopMiddle = get_option( 'wp-manual-cu-desktop-middle', true );
-	$desktopBottom = get_option( 'wp-manual-cu-desktop-bottom', true );
 
-	$tabletTop = get_option( 'wp-manual-cu-tablet-top', true );
 	$tabletMiddle = get_option( 'wp-manual-cu-tablet-middle', true );
-	$tabletBottom = get_option( 'wp-manual-cu-tablet-bottom', true );
 
-	$mobileTop = get_option( 'wp-manual-cu-mobile-top', true );
 	$mobileMiddle = get_option( 'wp-manual-cu-mobile-middle', true );
-	$mobileBottom = get_option( 'wp-manual-cu-mobile-bottom', true );
 
 	wp_enqueue_style( 'AdminBootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', array(), '', 'all' );
 	
@@ -53,40 +86,23 @@ function mcu_settings_page() {
 				<h2>Manage Content Units</h2>
 			</div>
 			<form method='post' action=''> 
-			<div class='col-sm-4'>
-				<label>Top Content Units</label>
+				<label>Wrapper Theme hook</label>
 				<br /> 
-				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Top' value='$desktopTop' name='desktop-top' />
-				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Top' value='$tabletTop' name='tablet-top' />
-				<input type='text' class='form-control form-group' placeholder='Mobile (320x300) Top' value='$mobileTop' name='mobile-top' />
-			</div>
-			<div class='col-sm-4'>
-				<label>Middle Content Units</label>
+				<input type='text' class='form-control form-group' placeholder='leave blank if you don't know what this is' value='$themeHook' name='theme-hook' />
+				<label>Middle Content Units (between each blog post)</label>
 				<br />
 				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Midt' value='$desktopMiddle' name='desktop-middle' />
 				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Midt' value='$tabletMiddle' name='tablet-middle' />
-				<input type='text' class='form-control' placeholder='Mobile (320x300) Midt' value='$mobileMiddle' name='mobile-middle' />
-			</div>
-			<div class='col-sm-4'>
-				<label>Bottom Content Units</label>
-				<br />
-				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Bottom' value='$desktopBottom' name='desktop-bottom'  />
-				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Bottom' value='$tabletBottom' name='tablet-bottom' />
-				<input type='text' class='form-control form-group' placeholder='Mobile (320x300) Bottom' value='$mobileBottom' name='mobile-bottom' />
-			</div>
-			<div class='col-xs-12'>
-				
+				<input type='text' class='form-control' placeholder='Mobile (320x300) Midt' value='$mobileMiddle' name='mobile-middle' />			
 				<hr />
-				<input type='submit' name='submit' value='Save' />
-				 
-			</div>
+				<input type='submit' name='submit' value='Save' class='btn btn-primary pull-right' />
 			</form>
 		</div>
 	</div>
 	";
 
 	echo $form;
-	echo get_option( 'wp-manual-cu-desktop-top', true );
+	//echo get_option( 'wp-manual-cu-desktop-top', true );
 }
 
 /*
