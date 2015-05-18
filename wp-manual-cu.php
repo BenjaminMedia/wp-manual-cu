@@ -10,7 +10,7 @@ Author URI: http://rabol.co
 
 // Hook for adding admin menus
 add_action('admin_menu', 'mcu_add_pages');
-add_action('wp_footer', 'mcu_add_footer_scripts');
+//add_action('wp_footer', 'mcu_add_footer_scripts');
 
 add_action(get_option( 'wp-manual-cu-theme-hook', 'alienship_post_after'), 'mcu_add_banner_scripts');
 
