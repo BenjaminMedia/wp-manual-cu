@@ -26,19 +26,18 @@ function mcu_add_banner_scripts() {
 			
 
 	$output =" 
-			<div class='banner mcu-test visible-md-lg'>
-			<!-- 'Blog_Acie_930x180_Midt' (section 'Stylista.dk - Bloggere') -->
-			<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+			<div class='col-xs-12'>
+				<div class='banner visible-md visible-lg'>
+				<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+					</div>
+					<div class='banner visible-sm'>
+				<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+					</div>
+					<div class='banner visible-xs'>
+				<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+					</div>
+					<div class='clearfix'></div>
 				</div>
-				<div class='banner visible-sm'>
-			<!-- 'Blog_Acie_tablet_728x90_midt' (section 'Stylista.dk - Bloggere') -->
-			<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-				</div>
-				<div class='banner visible-xs'>
-			<!-- 'Blog_Acie_mobil_320x300_midt' (section 'Stylista.dk - Bloggere') -->
-			<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-				</div>
-				<div class='clearfix'></div>
 			</div>
 	";
 
@@ -86,13 +85,16 @@ function mcu_settings_page() {
 				<h2>Manage Content Units</h2>
 			</div>
 			<form method='post' action=''> 
-				<label>Wrapper Theme hook</label>
+				<label for='theme-hook'>Wrapper Theme hook</label>
 				<br /> 
-				<input type='text' class='form-control form-group' placeholder='leave blank if you don't know what this is' value='$themeHook' name='theme-hook' />
-				<label>Middle Content Units (between each blog post)</label>
+				<input type='text' class='form-control form-group' placeholder='leave blank if you don/'t know what this is' value='$themeHook' name='theme-hook' />
+				<label for='theme-hook'>Middle Content Units (between each blog post)</label>
 				<br />
+				<label for='dekstop-middle'>Desktop Middle (930x180_Top)</label>
 				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Midt' value='$desktopMiddle' name='desktop-middle' />
+				<label for='tablet-middle'>Tablet Middle (930x180_midt)</label>
 				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Midt' value='$tabletMiddle' name='tablet-middle' />
+				<label for='mobile-middle'>Mobile Middle (320x300_midt)</label>
 				<input type='text' class='form-control' placeholder='Mobile (320x300) Midt' value='$mobileMiddle' name='mobile-middle' />			
 				<hr />
 				<input type='submit' name='submit' value='Save' class='btn btn-primary pull-right' />
