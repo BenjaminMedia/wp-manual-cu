@@ -27,17 +27,16 @@ function mcu_add_banner_scripts() {
 
 	$output =" 
 			<div class='col-xs-12'>
-				<div class='banner visible-md visible-lg'>
-				<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+					<div class='banner visible-md visible-lg'>
+						<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
 					</div>
 					<div class='banner visible-sm'>
-				<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+						<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
 					</div>
 					<div class='banner visible-xs'>
-				<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+						<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
 					</div>
 					<div class='clearfix'></div>
-				</div>
 			</div>
 	";
 
