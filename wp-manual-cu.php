@@ -75,6 +75,13 @@ function mcu_settings_page() {
 
 	$mobileMiddle = get_option( 'wp-manual-cu-mobile-middle', true );
 
+	$themeHook = get_option( 'wp-manual-cu-theme-hook', true );
+	$desktopTop = get_option( 'wp-manual-cu-desktop-top', true );
+
+	$tabletTop = get_option( 'wp-manual-cu-tablet-top', true );
+
+	$mobileTop = get_option( 'wp-manual-cu-mobile-top', true );
+
 	wp_enqueue_style( 'AdminBootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', array(), '', 'all' );
 	
 		$form = "
@@ -82,22 +89,22 @@ function mcu_settings_page() {
 		<div class='row'>
 			<div class='col-xs-12'>
 				<h2>Manage Content Units</h2>
+				<form method='post' action=''> 
+					<label for='theme-hook'>Wrapper Theme hook</label>
+					<br /> 
+					<input type='text' class='form-control form-group' placeholder='leave blank if you don/'t know what this is' value='$themeHook' name='theme-hook' />
+					<label for='theme-hook'>Middle Content Units (between each blog post)</label>
+					<br />
+					<label for='dekstop-middle'>Desktop Middle (930x180_Top)</label>
+					<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Midt' value='$desktopMiddle' name='desktop-middle' />
+					<label for='tablet-middle'>Tablet Middle (930x180_midt)</label>
+					<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Midt' value='$tabletMiddle' name='tablet-middle' />
+					<label for='mobile-middle'>Mobile Middle (320x300_midt)</label>
+					<input type='text' class='form-control' placeholder='Mobile (320x300) Midt' value='$mobileMiddle' name='mobile-middle' />			
+					<hr />
+					<input type='submit' name='submit' value='Save' class='btn btn-primary pull-right' />
+				</form>
 			</div>
-			<form method='post' action=''> 
-				<label for='theme-hook'>Wrapper Theme hook</label>
-				<br /> 
-				<input type='text' class='form-control form-group' placeholder='leave blank if you don/'t know what this is' value='$themeHook' name='theme-hook' />
-				<label for='theme-hook'>Middle Content Units (between each blog post)</label>
-				<br />
-				<label for='dekstop-middle'>Desktop Middle (930x180_Top)</label>
-				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Midt' value='$desktopMiddle' name='desktop-middle' />
-				<label for='tablet-middle'>Tablet Middle (930x180_midt)</label>
-				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Midt' value='$tabletMiddle' name='tablet-middle' />
-				<label for='mobile-middle'>Mobile Middle (320x300_midt)</label>
-				<input type='text' class='form-control' placeholder='Mobile (320x300) Midt' value='$mobileMiddle' name='mobile-middle' />			
-				<hr />
-				<input type='submit' name='submit' value='Save' class='btn btn-primary pull-right' />
-			</form>
 		</div>
 	</div>
 	";
@@ -105,41 +112,3 @@ function mcu_settings_page() {
 	echo $form;
 	//echo get_option( 'wp-manual-cu-desktop-top', true );
 }
-
-/*
-function manual_cu_admin_actions() {
-    add_options_page('manage_content_units',"Manual Content Units", "manage_content_units", "manual_cu_admin");
-}
-
-function manual_cu_admin(){
-	//silence is golden
-}
-
-function wp_manual_cu_init()
-{
-	$desktop_middle = 29787;
-	$tablet_middle = 33221;
-	$mobile_middle = 33218;
-	$html = '<div class="col-sm-12">
-		<div class="banner visible-md-lg">
-	<!-- "Blog_Acie_930x180_Midt" (section "Stylista.dk - Bloggere") -->
-	<script type="text/javascript" src="http://eas4.emediate.eu/eas?cu='.$desktop_middle.';cre=mu;js=y;pageviewid=;target=_blank"></script>
-		</div>
-		<div class="banner visible-sm">
-	<!-- "Blog_Acie_tablet_728x90_midt" (section "Stylista.dk - Bloggere") -->
-	<script type="text/javascript" src="http://eas4.emediate.eu/eas?cu='.$tablet_middle.';cre=mu;js=y;pageviewid=;target=_blank"></script>
-		</div>
-		<div class="banner visible-xs">
-	<!-- "Blog_Acie_mobil_320x300_midt" (section "Stylista.dk - Bloggere") -->
-	<script type="text/javascript" src="http://eas4.emediate.eu/eas?cu='.$mobile_middle.';cre=mu;js=y;pageviewid=;target=_blank"></script>
-		</div>
-		<div class="clearfix"></div>
-	</div>';
-	echo $html;
-
-}
-
-add_action('admin_menu', 'manual_cu_admin_actions');
-add_action('wp_head','wp_manual_cu_init');
-
-*/
