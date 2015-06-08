@@ -1,0 +1,254 @@
+#sticky {
+    padding: 0.5ex;
+    width: 240px;
+    font-size: 2em;
+}
+
+#sticky.stick {
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+}
+
+.site-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+@media (min-width:768px) {
+    .site-container {
+        width: 750px
+    }
+}
+
+@media (min-width:992px) {
+    .site-container {
+        width: 970px
+    }
+}
+
+@media (min-width:1200px) {
+    .site-container {
+        width: 1170px
+    }
+}
+
+/* FIX STICKY BANNERS ON LAYOUTS OVER 1200px */
+
+.bonnier-wrapper .banner {
+    z-index: 10;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    max-width: 100%;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container .side-banner {
+    width: 160px;
+    position: absolute;
+}
+
+.bonnier-wrapper .horseshoe .top-banner
+{
+    /*width: 980px;*/
+    text-align: center;
+}
+
+.bonnier-wrapper .horseshoe .top-banner .banner > div
+{
+    margin: 0 auto;
+}
+
+.bonnier-wrapper .fixed {
+    position: fixed;
+    top: 0;
+}
+
+.bonnier-wrapper .banner img {
+    max-width: 100%;
+}
+
+.bonnier-wrapper .horseshoe {
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container {
+    max-width: 100%;
+    overflow-x: visible !important;
+    margin: 0 auto;
+    position: relative;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container .side-banner {
+    width: 160px;
+}
+
+.bonnier-wrapper .gallery-horizontal .banner-min-height {
+    min-height: 300px;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container {
+    /*overflow-x: hidden; */
+    max-width: 100%;
+    margin: 0 auto;
+    width: 980px;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container .side-banner {
+    width: 160px;
+    position: absolute;
+    top: 0;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container .static {
+    margin-top: 1200px !important;
+    top: 0px;
+    position: absolute;
+
+}
+
+.bonnier-wrapper .left, .bonnier-wrapper .modal .close, .bonnier-wrapper .horseshoe .horseshoe-container .side-banner.banner-left {
+    left: 0;
+}
+
+.bonnier-wrapper .right, .bonnier-wrapper .modal .close, .bonnier-wrapper .horseshoe .horseshoe-container .side-banner.banner-right {
+    right: 0;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container .side-banner.banner-right {
+    margin-right: -160px;
+}
+
+.bonnier-wrapper .horseshoe .horseshoe-container .side-banner.banner-left {
+    margin-left: -160px;
+}
+
+.bonnier-wrapper .visible-xs,.bonnier-wrapper .visible-xs-sm,.bonnier-wrapper .visible-sm,.bonnier-wrapper .visible-xs-sm,.bonnier-wrapper .visible-md,.bonnier-wrapper .visible-md-lg,.bonnier-wrapper .visible-lg,.bonnier-wrapper .visible-md-lg {
+    display: none !important
+}
+
+.bonnier-wrapper .visible-xs-block,.bonnier-wrapper .visible-xs-inline,.bonnier-wrapper .visible-xs-inline-block,.bonnier-wrapper .visible-sm-block,.bonnier-wrapper .visible-sm-inline,.bonnier-wrapper .visible-sm-inline-block,.bonnier-wrapper .visible-md-block,.bonnier-wrapper .visible-md-inline,.bonnier-wrapper .visible-md-inline-block,.bonnier-wrapper .visible-lg-block,.bonnier-wrapper .visible-lg-inline,.bonnier-wrapper .visible-lg-inline-block {
+    display: none !important
+}
+
+@media (max-width: 767px) {
+    .bonnier-wrapper .visible-xs,.bonnier-wrapper .visible-xs-sm {
+        display: block !important
+    }
+}
+
+@media (max-width: 767px) {
+    .bonnier-wrapper .visible-xs-block {
+        display: block !important
+    }
+}
+
+@media (max-width: 767px) {
+    .bonnier-wrapper .visible-xs-inline {
+        display: inline !important
+    }
+}
+
+@media (max-width: 767px) {
+    .bonnier-wrapper .visible-xs-inline-block {
+        display: inline-block !important
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .bonnier-wrapper .visible-sm,.bonnier-wrapper .visible-xs-sm {
+        display: block !important
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .bonnier-wrapper .visible-sm-block {
+        display: block !important
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .bonnier-wrapper .visible-sm-inline {
+        display: inline !important
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .bonnier-wrapper .visible-sm-inline-block {
+        display: inline-block !important
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+    .bonnier-wrapper .visible-md,.bonnier-wrapper .visible-md-lg {
+        display: block !important
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+    .bonnier-wrapper .visible-md-block {
+        display: block !important
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+    .bonnier-wrapper .visible-md-inline {
+        display: inline !important
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+    .bonnier-wrapper .visible-md-inline-block {
+        display: inline-block !important
+    }
+}
+
+@media (min-width: 1200px) {
+    .bonnier-wrapper .visible-lg,.bonnier-wrapper .visible-md-lg {
+        display: block !important
+    }
+}
+
+@media (min-width: 1200px) {
+    .bonnier-wrapper .visible-lg-block {
+        display: block !important
+    }
+}
+
+@media (min-width: 1200px) {
+    .bonnier-wrapper .visible-lg-inline {
+        display: inline !important
+    }
+}
+
+@media (min-width: 1200px) {
+    .bonnier-wrapper .visible-lg-inline-block {
+        display: inline-block !important
+    }
+}
+
+@media (max-width: 767px) {
+    .bonnier-wrapper .hidden-xs,.bonnier-wrapper .hidden-xs-sm,.bonnier-wrapper .scroll-message {
+        display: none !important
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .bonnier-wrapper .hidden-sm,.bonnier-wrapper .hidden-xs-sm,.bonnier-wrapper .scroll-message,.bonnier-wrapper .logo-xs {
+        display: none !important
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+    .bonnier-wrapper .hidden-md,.bonnier-wrapper .hidden-md-lg,.bonnier-wrapper .logo-xs {
+        display: none !important
+    }
+}
+
+@media (min-width: 1200px) {
+    .bonnier-wrapper .hidden-lg,.bonnier-wrapper .hidden-md-lg,.bonnier-wrapper .logo-xs {
+        display: none !important
+    }
+}
