@@ -1,42 +1,4 @@
-#sticky {
-    padding: 0.5ex;
-    width: 240px;
-    font-size: 2em;
-}
-
-#sticky.stick {
-    position: fixed;
-    top: 0;
-    z-index: 10000;
-}
-
-.site-container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
-}
-
-@media (min-width:768px) {
-    .site-container {
-        width: 750px
-    }
-}
-
-@media (min-width:992px) {
-    .site-container {
-        width: 970px
-    }
-}
-
-@media (min-width:1200px) {
-    .site-container {
-        width: 1170px
-    }
-}
-
 /* FIX STICKY BANNERS ON LAYOUTS OVER 1200px */
-
 .bonnier-wrapper .banner {
     z-index: 10;
     overflow-x: hidden;
