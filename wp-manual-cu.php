@@ -11,37 +11,88 @@ Author URI: http://rabol.co
 $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
 
 const HOOK_DEFAULT_MIDDLE = 'alienship_post_after';
-const HOOK_DEFAULT_TOP_STICKY = 'genesis_before_header';
+const HOOK_DEFAULT_HORSESHOE = 'genesis_before_header';
+const HOOK_DEFAULT_FOOTER = 'wp_footer';
 
+// Add hooks
+add_action('admin_menu', function() {
+    // Add a new submenu under Settings:
+    add_options_page('Manual Content Units', 'Manage Content Units', 'manage_options', 'mcu_settings', 'mcu_settings_page');
+});
+
+add_action(getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE), 'add_middle_banners');
+add_action(getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE), 'add_horseshoe_banners');
+add_action(getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER), 'add_footer_banners');
+
+/**
+ * Get option from Wordpress or default value
+ * @param $option
+ * @param null $defaultValue
+ * @return mixed|null|void
+ */
 function getOptionOrDefault($option, $defaultValue = NULL) {
     $themeHook = get_option('wp-manual-cu-' . $option, NULL );
     return (empty($themeHook)) ? $defaultValue : $themeHook;
 }
 
-function add_middle_banners() {
-    $desktopMiddle = get_option('wp-manual-cu-desktop-middle', NULL);
-    $tabletMiddle = get_option('wp-manual-cu-tablet-middle', NULL);
-    $mobileMiddle = get_option('wp-manual-cu-mobile-middle', NULL);
+// Add scripts and styles
+add_action('wp_enqueue_scripts', function() {
+    global $publicFolder;
 
-    $output ="
-			<div class='col-xs-12'>
-					<div class='banner visible-md visible-lg'>
-						<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-					</div>
-					<div class='banner visible-sm'>
-						<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-					</div>
-					<div class='banner visible-xs'>
-						<script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-					</div>
-					<div class='clearfix'></div>
-			</div>
-	";
+    wp_enqueue_style('wa-manual-cu-css', $publicFolder . '/css/wa-manual-cu.css');
+    wp_enqueue_script('EAS-fif', $publicFolder . '/js/EAS_fif.js');
+    wp_enqueue_script('wa-manual-cu-js', $publicFolder . '/js/wa-manual-cu.js');
+}, 999);
+
+
+
+function add_footer_banners() {
+    $footerMobile = getOptionOrDefault('desktop-footer');
+    $footerTablet = getOptionOrDefault('tablet-footer');
+    $footerDesktop = getOptionOrDefault('mobile-footer');
+
+    $output = <<<HTML
+<div class='col-xs-12'>
+        <div class='banner visible-md visible-lg'>
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+        <div class='banner visible-sm'>
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+        <div class='banner visible-xs'>
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerMobile;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+        <div class='clearfix'></div>
+</div>
+HTML;
 
     echo $output;
 }
 
-function add_sticky_top_banners() {
+function add_middle_banners() {
+    $desktopMiddle = getOptionOrDefault('desktop-middle');
+    $tabletMiddle = getOptionOrDefault('tablet-middle');
+    $mobileMiddle = getOptionOrDefault('mobile-middle');
+
+    $output = <<<HTML
+<div class='col-xs-12'>
+        <div class='banner visible-md visible-lg'>
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+        <div class='banner visible-sm'>
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+        <div class='banner visible-xs'>
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+        <div class='clearfix'></div>
+</div>
+HTML;
+
+    echo $output;
+}
+
+function add_horseshoe_banners() {
 
     global $publicFolder;
 
@@ -118,28 +169,6 @@ HTML;
     echo $output;
 }
 
-// Add hooks
-add_action('admin_menu', 'mcu_add_pages');
-add_action(getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE), 'add_middle_banners');
-add_action(getOptionOrDefault('theme-hook-sticky-top', HOOK_DEFAULT_TOP_STICKY), 'add_sticky_top_banners');
-
-
-add_action('wp_enqueue_scripts', function() {
-    global $publicFolder;
-
-    wp_enqueue_style('wa-manual-cu-css', $publicFolder . '/css/wa-manual-cu.css');
-
-    wp_enqueue_script('EAS-fif', $publicFolder . '/js/EAS_fif.js');
-    //wp_enqueue_script('sticky-banners', $publicFolder . '/js/cu-sticky-banner.js');
-    wp_enqueue_script('wa-manual-cu-js', $publicFolder . '/js/wa-manual-cu.js');
-}, 999);
-
-// action function for above hook
-function mcu_add_pages() {
-    // Add a new submenu under Settings:
-	add_options_page('Manual Content Units', 'Manage Content Units', 'manage_options', 'mcu_settings', 'mcu_settings_page');
-}
-
 //settings page
 function mcu_settings_page() {
 	if (count($_POST) >= 1) {
@@ -153,7 +182,8 @@ function mcu_settings_page() {
 	}
 
     $middleHook = getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE);
-    $stickyTopHook = getOptionOrDefault('theme-hook-sticky-top', HOOK_DEFAULT_TOP_STICKY);
+    $stickyTopHook = getOptionOrDefault('theme-hook-sticky-top', HOOK_DEFAULT_HORSESHOE);
+    $footerHook = getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER);
 
 
 	$desktopMiddle = get_option( 'wp-manual-cu-desktop-middle', NULL );
@@ -167,66 +197,95 @@ function mcu_settings_page() {
     $sidebannerLeft = get_option( 'wp-manual-cu-sidebanner-left', NULL );
     $sidebannerRight = get_option( 'wp-manual-cu-sidebanner-right', NULL );
 
+    $desktopFooter = get_option( 'wp-manual-cu-desktop-footer', NULL );
+    $tabletFooter = get_option( 'wp-manual-cu-tablet-footer', NULL );
+    $mobileFooter = get_option( 'wp-manual-cu-mobile-footer', NULL );
+
     $stickyRight = get_option( 'wp-manual-cu-sticky-right', NULL );
     $stickyLeft = get_option( 'wp-manual-cu-sticky-left', NULL );
 
 	wp_enqueue_style( 'AdminBootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', array(), '', 'all' );
 
     $form = <<< HTML
+    <style>
+        html { background-color: #FFF;}
+        .padding-t { padding-top: 30px; }
+        .padding-b { padding-bottom: 20px; }
+    </style>
 	<div class="container">
 		<div class="row">
 		    <div class="col-xs-12">
-            <h2>Manage Content Units</h2>
+            <!--<h2>Manage Content Units</h2> -->
 
 			<form method="post" action=''>
-			    <h3>Middle banners</h3>
-			    <p>
-			        Middle Content Units (between each blog post)
-			    </p>
+				<h3 class="padding-t">Horseshoe banners</h3>
 
-				<label for="theme-hook">Hook</label>
-
-				<input type="text" class="form-control form-group" placeholder="Leave blank if you don't know what this is" value="$middleHook" name="theme-hook-middle" />
-
-				<label for='dekstop-middle'>Desktop middle (930x180_Top)</label>
-				<input type='text' class='form-control form-group' placeholder='Desktop (930x180) Midt' value='$desktopMiddle' name='desktop-middle' />
-				<label for='tablet-middle'>Tablet middle (930x180_midt)</label>
-				<input type='text' class='form-control form-group' placeholder='Tablet (728x90) Midt' value='$tabletMiddle' name='tablet-middle' />
-				<label for='mobile-middle'>Mobile middle (320x300_midt)</label>
-				<input type='text' class='form-control form-group' placeholder='Mobile (320x300) Midt' value='$mobileMiddle' name='mobile-middle' />
-
-				<h3>Horseshoe banners</h3>
-
-				<p>
-			        Sticky/top banners description
+				<p class="padding-b">
+			        Content units that will be displayed in the horseshoe (top of the page).
 			    </p>
 
                 <label for="theme-hook">Hook</label>
 				<input type="text" class="form-control form-group" placeholder="Hook for executing sticky/top banners" value="$stickyTopHook" name="theme-hook-sticky-top" />
 
-				<label for='mobile-middle'>Desktop top (930x180_top)</label>
-				<input type='text' class='form-control form-group' placeholder='Desktop (320x300) top' value='$desktopTop' name='desktop-top' />
+				<label for="mobile-middle" class="padding-t">Desktop top</label>
+				<input type="text" class="form-control form-group" placeholder="Desktop" value="$desktopTop" name="desktop-top" />
 
-				<label for='mobile-middle'>Tablet top (930x180_top)</label>
-				<input type='text' class='form-control form-group' placeholder='Tablet (930x180) top' value='$tabletTop' name='tablet-top' />
+				<label for="mobile-middle">Tablet top</label>
+				<input type="text" class="form-control form-group" placeholder="Tablet" value='$tabletTop' name="tablet-top" />
 
-				<label for='mobile-middle'>Mobile top (320x300_top)</label>
-				<input type='text' class='form-control form-group' placeholder='Desktop (320x300) top' value='$mobileTop' name='mobile-top' />
+				<label for='mobile-middle'>Mobile top</label>
+				<input type='text' class='form-control form-group' placeholder='Mobile' value='$mobileTop' name='mobile-top' />
 
-				<label for='mobile-middle'>Left (160x600)</label>
-				<input type='text' class='form-control form-group' placeholder='Sidebanner left (160x600) Venstre' value='$sidebannerLeft' name='sidebanner-left' />
 
-                <label for='mobile-middle'>Right (160x600)</label>
-				<input type='text' class='form-control form-group' placeholder='Sidebanner right (160x600) Venstre' value='$sidebannerRight' name='sidebanner-right' />
+				<label for='mobile-middle' class="padding-t">Left</label>
+				<input type='text' class='form-control form-group' placeholder='Sidebanner left' value='$sidebannerLeft' name='sidebanner-left' />
 
-                <label for='mobile-middle'>Sticky left (160x600)</label>
-				<input type='text' class='form-control form-group' placeholder='Sticky (160x600) Højre' value='$stickyLeft' name='sticky-left' />
+                <label for='mobile-middle'>Right</label>
+				<input type='text' class='form-control form-group' placeholder='Sidebanner right' value='$sidebannerRight' name='sidebanner-right' />
 
-				<label for='mobile-middle'>Sticky right (160x600)</label>
-				<input type='text' class='form-control form-group' placeholder='Sticky (160x600) Højre' value='$stickyRight' name='sticky-right' />
 
-				<hr />
-				<input type='submit' name='submit' value='Save' class='btn btn-primary pull-right' />
+                <label for='mobile-middle' class="padding-t">Sticky left</label>
+				<input type='text' class='form-control form-group' placeholder='Sticky left' value='$stickyLeft' name='sticky-left' />
+
+				<label for='mobile-middle'>Sticky right</label>
+				<input type='text' class='form-control form-group' placeholder='Sticky right' value='$stickyRight' name='sticky-right' />
+
+                <h3 style="padding-top:30px;">Middle banners</h3>
+			    <p style="padding-bottom:20px;">
+			        Content units that will be displayed between each post.
+			    </p>
+
+				<label for="theme-hook">Hook</label>
+
+				<input type="text" class="form-control form-group" placeholder="Hook for executing middle bannerts" value="$middleHook" name="theme-hook-middle" />
+
+				<label for='dekstop-middle' class=padding-t>Desktop middle</label>
+				<input type='text' class='form-control form-group' placeholder='Desktop' value='$desktopMiddle' name='desktop-middle' />
+				<label for='tablet-middle'>Tablet middle</label>
+				<input type='text' class='form-control form-group' placeholder='Tablet' value='$tabletMiddle' name='tablet-middle' />
+				<label for='mobile-middle'>Mobile middle</label>
+				<input type='text' class='form-control form-group' placeholder='Mobile' value='$mobileMiddle' name='mobile-middle' />
+
+                <h3 class="padding-t">Footer banners</h3>
+
+				<p class="padding-b">
+			        Content units that will be displayed in the footer
+			    </p>
+
+			    <label for="theme-hook">Hook</label>
+				<input type="text" class="form-control form-group" placeholder="Hook for executing footer banners" value="$footerHook" name="theme-hook-footer" />
+
+                <label for="mobile-middle" class="padding-t">Desktop</label>
+				<input type='text' class='form-control form-group' placeholder='Desktop' value='$desktopFooter' name='desktop-footer' />
+
+				<label for="mobile-middle">Tablet</label>
+				<input type='text' class="form-control form-group" placeholder="Tablet" value="$tabletFooter" name="tablet-footer" />
+
+				<label for="mobile-middle">Mobile top</label>
+				<input type="text" class="form-control form-group" placeholder="Mobile" value="$mobileFooter" name="mobile-footer" />
+
+
+				<input type='submit' name='submit' value='Save' class='btn btn-primary' style="margin-top: 30px;" />
 			</form>
 			</div>
 		</div>
