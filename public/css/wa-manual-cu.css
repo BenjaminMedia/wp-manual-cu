@@ -1,4 +1,9 @@
 /* FIX STICKY BANNERS ON LAYOUTS OVER 1200px */
+.bonnier-wrapper
+{
+    text-align:center;
+}
+
 .bonnier-wrapper .banner {
     z-index: 10;
     overflow-x: hidden;
@@ -188,29 +193,5 @@
 @media (min-width: 1200px) {
     .bonnier-wrapper .visible-lg-inline-block {
         display: inline-block !important
-    }
-}
-
-@media (max-width: 767px) {
-    .bonnier-wrapper .hidden-xs,.bonnier-wrapper .hidden-xs-sm,.bonnier-wrapper .scroll-message {
-        display: none !important
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    .bonnier-wrapper .hidden-sm,.bonnier-wrapper .hidden-xs-sm,.bonnier-wrapper .scroll-message,.bonnier-wrapper .logo-xs {
-        display: none !important
-    }
-}
-
-@media (min-width: 1025px) and (max-width: 1199px) {
-    .bonnier-wrapper .hidden-md,.bonnier-wrapper .hidden-md-lg,.bonnier-wrapper .logo-xs {
-        display: none !important
-    }
-}
-
-@media (min-width: 1200px) {
-    .bonnier-wrapper .hidden-lg,.bonnier-wrapper .hidden-md-lg,.bonnier-wrapper .logo-xs {
-        display: none !important
     }
 }
