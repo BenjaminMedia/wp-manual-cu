@@ -53,17 +53,14 @@ function add_footer_banners() {
 
     $output = <<<HTML
 <div class="bonnier-wrapper">
-    <div class='col-xs-12'>
-            <div class='banner visible-md visible-lg'>
-                <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=;target=_blank'></script>
-            </div>
-            <div class='banner visible-sm'>
-                <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=;target=_blank'></script>
-            </div>
-            <div class='banner visible-xs'>
-                <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerMobile;cre=mu;js=y;pageviewid=;target=_blank'></script>
-            </div>
-            <div class='clearfix'></div>
+    <div class='banner visible-md visible-lg'>
+        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=;target=_blank'></script>
+    </div>
+    <div class='banner visible-sm'>
+        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=;target=_blank'></script>
+    </div>
+    <div class='banner visible-xs'>
+        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerMobile;cre=mu;js=y;pageviewid=;target=_blank'></script>
     </div>
 </div>
 HTML;
@@ -78,17 +75,14 @@ function add_middle_banners() {
 
     $output = <<<HTML
 <div class="bonnier-wrapper">
-    <div class='col-xs-12'>
-            <div class='banner visible-md visible-lg'>
-                <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-            </div>
-            <div class='banner visible-sm'>
-                <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-            </div>
-            <div class='banner visible-xs'>
-                <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
-            </div>
-            <div class='clearfix'></div>
+    <div class='banner visible-md visible-lg'>
+        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+    </div>
+    <div class='banner visible-sm'>
+        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+    </div>
+    <div class='banner visible-xs'>
+        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
     </div>
 </div>
 HTML;
