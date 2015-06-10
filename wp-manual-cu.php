@@ -91,7 +91,6 @@ HTML;
 }
 
 function add_horseshoe_banners() {
-
     global $publicFolder;
 
     $sidebannerLeft = getOptionOrDefault('sidebanner-left');
@@ -180,7 +179,7 @@ function mcu_settings_page() {
 	}
 
     $middleHook = getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE);
-    $stickyTopHook = getOptionOrDefault('theme-hook-sticky-top', HOOK_DEFAULT_HORSESHOE);
+    $stickyTopHook = getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE);
     $footerHook = getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER);
 
 
@@ -223,7 +222,7 @@ function mcu_settings_page() {
 			    </p>
 
                 <label for="theme-hook">Hook</label>
-				<input type="text" class="form-control form-group" placeholder="Hook for executing sticky/top banners" value="$stickyTopHook" name="theme-hook-sticky-top" />
+				<input type="text" class="form-control form-group" placeholder="Hook for executing sticky/top banners" value="$stickyTopHook" name="theme-hook-horseshoe" />
 
 				<label for="mobile-middle" class="padding-t">Desktop top</label>
 				<input type="text" class="form-control form-group" placeholder="Desktop" value="$desktopTop" name="desktop-top" />
