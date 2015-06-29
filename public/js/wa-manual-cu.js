@@ -1,29 +1,61 @@
 (function( $ ) {
     $(function() {
-        var defaultBannerPosition = 2200;
-        var defaultOffset = 0;
+        var defaultOffsets = [];
+        var maxScrolls = [];
 
         $.stickybanners = function(elements) {
-            defaultOffset = elements.offset().top;
-            $(document).on('scroll', function() {
-                elements.each(function() {
+            $.each(elements, function() {
+                var container = $($(this).data('container'));
+                var offset = $(this).offset().top;
+
+                defaultOffsets.push(offset);
+
+                var max = 0;
+                var container = $(this).data('container');
+                if(container != '') {
+                    container = $(container);
+                    if(container.length > 0) {
+                        max = (container.offset().top + container.outerHeight()) - $(this).outerHeight();
+                    }
+                }
+
+                maxScrolls.push(max);
+            });
+
+            var checkBanner = function() {
+                elements.each(function(i) {
                     var el = $(this);
-                    if($(window).scrollTop() > defaultOffset && el.hasClass('static')) {
-                        el.css({ 'top': 0 }).removeClass('static');
+                    var defaultOffset = defaultOffsets[i];
+                    var maxScroll = maxScrolls[i];
+
+                    if(maxScroll > 0) {
+                        if($(window).scrollTop() > maxScroll && !el.hasClass('max')) {
+                            el.removeClass('fixed').addClass('max');
+                        }
+
+                        if($(window).scrollTop() < maxScroll && el.hasClass('max')) {
+                            el.removeClass('max');
+                        }
                     }
 
-                    if($(window).scrollTop() < defaultOffset && !el.hasClass('static')) {
-                        el.addClass('static');
+                    if($(window).scrollTop() < defaultOffset && el.hasClass('fixed')) {
+                        el.removeClass('fixed');
+                    }
+
+                    if($(window).scrollTop() > defaultOffset && !el.hasClass('fixed') && !el.hasClass('max')) {
+                        el.addClass('fixed');
                     }
                 });
+            };
+
+            $(document).on('scroll', function() {
+                checkBanner();
             });
+
+            // Initialize so it displays banners when offset < scroll
+            checkBanner();
         };
 
-        var el = $('[data-listen="sticky-banner"]');
-        if(el.children().length && $(document).height() > defaultBannerPosition) {
-            $.stickybanners(el);
-        } else {
-            el.hide();
-        }
+        $.stickybanners($('[data-listen="sticky-banner"]'));
     });
 })(jQuery);

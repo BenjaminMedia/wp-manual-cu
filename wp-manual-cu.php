@@ -3,9 +3,9 @@
 Plugin Name: WordPress Manual Content Units
 Plugin URI: https://github.com/BenjaminMedia/wp-manual-cu
 Description: Plugin that allows you to manually add Specific Content Units to WordPress
-Author: Frederik Rabøl & Alf Henderson
-Version: 0.5
-Author URI: http://rabol.co
+Author: Simon Sessingø (Frederik Rabøl & Alf Henderson er kærester)
+Version: 1.0
+Author URI: http://www.bonnier.dk
 */
 
 $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
@@ -13,6 +13,36 @@ $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
 const HOOK_DEFAULT_MIDDLE = 'alienship_post_after';
 const HOOK_DEFAULT_HORSESHOE = 'genesis_before_header';
 const HOOK_DEFAULT_FOOTER = 'wp_footer';
+
+// Enable shortcodes in widget-text
+add_filter('widget_text', 'do_shortcode');
+
+//[foobar]
+function insert_banner($attrs) {
+    $a = shortcode_atts( array(
+        'cu' => NULL,
+        'sticky' => FALSE,
+        'container' => ''
+    ), $attrs );
+
+    $cu = $a['cu'];
+    $isSticky = ($a['sticky']) ? ' data-listen="sticky-banner" data-container="'. $a['container'] .'"' : '';
+
+    if(!is_null($cu)) {
+        $output = <<<HTML
+<div class="bonnier-banner-container">
+    <div class="banner"$isSticky>
+        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$cu;cre=mu;js=y;pageviewid=;target=_blank'></script>
+    </div>
+</div>
+HTML;
+        return $output;
+    }
+
+    return '';
+}
+add_shortcode('banner', 'insert_banner');
+
 
 // Add hooks
 add_action('admin_menu', function() {
@@ -96,9 +126,6 @@ function add_horseshoe_banners() {
     $sidebannerLeft = getOptionOrDefault('sidebanner-left');
     $sidebannerRight = getOptionOrDefault('sidebanner-right');
 
-    $stickyLeft = getOptionOrDefault('sticky-left');
-    $stickyRight = getOptionOrDefault('sticky-right');
-
     $desktopTop = getOptionOrDefault('desktop-top');
     $tabletTop = getOptionOrDefault('tablet-top');
     $mobileTop = getOptionOrDefault('mobile-top');
@@ -112,15 +139,6 @@ function add_horseshoe_banners() {
                 <script>
                     EAS_load_fif("EAS_fif_$sidebannerLeft", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerLeft;cre=mu;js=y;pageviewid=;target=_blank", 240, 600);
                 </script>
-
-                <div class="static fixed" data-listen="sticky-banner">
-                    <div class="banner-min-height banner gtm-banner">
-                        <div id="EAS_fif_$stickyLeft"></div>
-                        <script>
-                            EAS_load_fif("EAS_fif_$stickyLeft", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyLeft;cre=mu;js=y;pageviewid=;target=_blank", 320, 150);
-                        </script>
-                    </div>
-                </div>
             </div>
 
             <div class="top-banner" data-top-banner>
@@ -149,14 +167,6 @@ function add_horseshoe_banners() {
                 <script>
                     EAS_load_fif("EAS_fif_$sidebannerRight", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerRight;cre=mu;js=y;pageviewid=;target=_blank", 240, 600);
                 </script>
-                <div class="static fixed" data-listen="sticky-banner">
-                    <div class="banner-min-height banner gtm-banner">
-                        <div id="EAS_fif_$stickyRight"></div>
-                        <script>
-                            EAS_load_fif("EAS_fif_$stickyRight", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyRight;cre=mu;js=y;pageviewid=;target=_blank", 320, 150);
-                        </script>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -179,27 +189,24 @@ function mcu_settings_page() {
 	}
 
     $middleHook = getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE);
-    $stickyTopHook = getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE);
+    $horseshoeHook = getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE);
     $footerHook = getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER);
 
 
-	$desktopMiddle = get_option( 'wp-manual-cu-desktop-middle', NULL );
-	$tabletMiddle = get_option( 'wp-manual-cu-tablet-middle', NULL );
-	$mobileMiddle = get_option( 'wp-manual-cu-mobile-middle', NULL );
+	$desktopMiddle = getOptionOrDefault('desktop-middle', NULL);
+	$tabletMiddle = getOptionOrDefault('tablet-middle', NULL);
+	$mobileMiddle = getOptionOrDefault('mobile-middle', NULL);
 
-    $desktopTop = get_option( 'wp-manual-cu-desktop-top', NULL );
-    $tabletTop = get_option( 'wp-manual-cu-tablet-top', NULL );
-    $mobileTop = get_option( 'wp-manual-cu-mobile-top', NULL );
+    $desktopTop = getOptionOrDefault('desktop-top', NULL);
+    $tabletTop = getOptionOrDefault('tablet-top', NULL);
+    $mobileTop = getOptionOrDefault('mobile-top', NULL);
 
-    $sidebannerLeft = get_option( 'wp-manual-cu-sidebanner-left', NULL );
-    $sidebannerRight = get_option( 'wp-manual-cu-sidebanner-right', NULL );
+    $sidebannerLeft = getOptionOrDefault('sidebanner-left', NULL);
+    $sidebannerRight = getOptionOrDefault('sidebanner-right', NULL);
 
-    $desktopFooter = get_option( 'wp-manual-cu-desktop-footer', NULL );
-    $tabletFooter = get_option( 'wp-manual-cu-tablet-footer', NULL );
-    $mobileFooter = get_option( 'wp-manual-cu-mobile-footer', NULL );
-
-    $stickyRight = get_option( 'wp-manual-cu-sticky-right', NULL );
-    $stickyLeft = get_option( 'wp-manual-cu-sticky-left', NULL );
+    $desktopFooter = getOptionOrDefault('desktop-footer', NULL);
+    $tabletFooter = getOptionOrDefault('tablet-footer', NULL);
+    $mobileFooter = getOptionOrDefault('mobile-footer', NULL);
 
 	wp_enqueue_style( 'AdminBootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', array(), '', 'all' );
 
@@ -222,7 +229,7 @@ function mcu_settings_page() {
 			    </p>
 
                 <label for="theme-hook">Hook</label>
-				<input type="text" class="form-control form-group" placeholder="Hook for executing sticky/top banners" value="$stickyTopHook" name="theme-hook-horseshoe" />
+				<input type="text" class="form-control form-group" placeholder="Hook for outputting the horseshoe" value="$horseshoeHook" name="theme-hook-horseshoe" />
 
 				<label for="mobile-middle" class="padding-t">Desktop top</label>
 				<input type="text" class="form-control form-group" placeholder="Desktop" value="$desktopTop" name="desktop-top" />
@@ -233,19 +240,11 @@ function mcu_settings_page() {
 				<label for='mobile-middle'>Mobile top</label>
 				<input type='text' class='form-control form-group' placeholder='Mobile' value='$mobileTop' name='mobile-top' />
 
-
 				<label for='mobile-middle' class="padding-t">Left</label>
 				<input type='text' class='form-control form-group' placeholder='Sidebanner left' value='$sidebannerLeft' name='sidebanner-left' />
 
                 <label for='mobile-middle'>Right</label>
 				<input type='text' class='form-control form-group' placeholder='Sidebanner right' value='$sidebannerRight' name='sidebanner-right' />
-
-
-                <label for='mobile-middle' class="padding-t">Sticky left</label>
-				<input type='text' class='form-control form-group' placeholder='Sticky left' value='$stickyLeft' name='sticky-left' />
-
-				<label for='mobile-middle'>Sticky right</label>
-				<input type='text' class='form-control form-group' placeholder='Sticky right' value='$stickyRight' name='sticky-right' />
 
                 <h3 style="padding-top:30px;">Middle banners</h3>
 			    <p style="padding-bottom:20px;">

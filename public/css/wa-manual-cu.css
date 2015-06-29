@@ -73,7 +73,6 @@
     margin-top: 1200px !important;
     top: 0px;
     position: absolute;
-
 }
 
 .bonnier-wrapper .left, .bonnier-wrapper .modal .close, .bonnier-wrapper .horseshoe .horseshoe-container .side-banner.banner-left {
@@ -194,4 +193,18 @@
     .bonnier-wrapper .visible-lg-inline-block {
         display: inline-block !important
     }
+}
+
+/* Bonnier banner shortcode */
+.bonnier-banner-container  {
+    position: relative;
+}
+.bonnier-banner-container .banner.fixed {
+    top: 0px;
+    position: fixed;
+}
+
+.bonnier-banner-container .banner.max {
+    position: absolute;
+    bottom: 0;
 }
