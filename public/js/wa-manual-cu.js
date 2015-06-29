@@ -48,7 +48,7 @@
                 });
             };
 
-            $(document).on('scroll', function() {
+            $(document).off('scroll.stickybanners').on('scroll.stickybanners', function() {
                 checkBanner();
             });
 
@@ -57,5 +57,9 @@
         };
 
         $.stickybanners($('[data-listen="sticky-banner"]'));
+
+        $(window).off('resize.stickybanners').on('resize.stickybanners', function() {
+            $.stickybanners($('[data-listen="sticky-banner"]'));
+        });
     });
 })(jQuery);
