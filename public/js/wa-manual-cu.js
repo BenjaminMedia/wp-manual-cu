@@ -6,7 +6,7 @@
         $.stickybanners = function(elements) {
             $.each(elements, function() {
                 var container = $($(this).data('container'));
-                var offset = $(this).offset().top;
+                var offset = ((($(this).data('offset') && $(this).data('offset') > 0)) ? $(this).data('offset') : $(this).offset().top);
 
                 defaultOffsets.push(offset);
 

@@ -22,11 +22,13 @@ function insert_banner($attrs) {
     $a = shortcode_atts( array(
         'cu' => NULL,
         'sticky' => FALSE,
+        'offset' => NULL,
         'container' => ''
     ), $attrs );
 
     $cu = $a['cu'];
-    $isSticky = ($a['sticky']) ? ' data-listen="sticky-banner" data-container="'. $a['container'] .'"' : '';
+    $offset = $a['offset'];
+    $isSticky = ($a['sticky']) ? ' data-listen="sticky-banner" data-offset="'.$offset.'" data-container="'. $a['container'] .'"' : '';
 
     if(!is_null($cu)) {
         $output = <<<HTML
