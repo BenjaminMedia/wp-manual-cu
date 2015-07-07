@@ -208,3 +208,9 @@
     position: absolute;
     bottom: 0;
 }
+
+@media only screen and (max-width: 799px) {
+    div[data-listen="sticky-banner"]{
+        display: none;
+    }
+}
