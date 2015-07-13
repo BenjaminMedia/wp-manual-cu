@@ -26,3 +26,12 @@ To only change offset on the left/right:
    top: 200px;
 }
 ```
+
+##Shortcode
+If you want to manually add a banners somewhere, you can use the shortcode.
+
+```html
+[banner cu="xxxxxx" offset=""]
+```
+cu = Content Unit number
+offset = top Offset on the banner in pixels
