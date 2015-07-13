@@ -3,9 +3,9 @@
 Plugin Name: WordPress Manual Content Units
 Plugin URI: https://github.com/BenjaminMedia/wp-manual-cu
 Description: Plugin that allows you to manually add Specific Content Units to WordPress
-Author: Simon Sessingø (Frederik Rabøl & Alf Henderson er kærester)
+Author: Simon Sessingø, Frederik Rabøl & Alf Henderson
 Version: 1.0
-Author URI: http://www.bonnier.dk
+Author URI: http://www.bonnierpublications.com
 */
 
 $publicFolder = plugin_dir_url( __FILE__ ) . 'public';

@@ -238,8 +238,12 @@
     float: left;
 }
 
-.bonnier-banner-container.sticky .right
-{
+.bonnier-banner-container.sticky .right {
     float: right;
     margin-right: 160px;
+}
+@media only screen and (max-width: 799px) {
+    div[data-listen="sticky-banner"]{
+        display: none;
+    }
 }
