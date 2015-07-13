@@ -208,3 +208,38 @@
     position: absolute;
     bottom: 0;
 }
+
+.bonnier-banner-container.sticky
+{
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.bonnier-banner-container.sticky .left,
+.bonnier-banner-container.sticky .right
+{
+    position: relative;
+}
+
+.bonnier-banner-container.sticky .banner
+{
+    position: absolute;
+    top: 700px;
+}
+
+.bonnier-banner-container.sticky .banner.fixed
+{
+    position: fixed;
+    top: 0;
+}
+
+.bonnier-banner-container.sticky .left
+{
+    float: left;
+}
+
+.bonnier-banner-container.sticky .right
+{
+    float: right;
+    margin-right: 160px;
+}

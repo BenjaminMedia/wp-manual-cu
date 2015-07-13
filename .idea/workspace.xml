@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8091b190-3a5a-4b35-8315-56d61b2938ce" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/wa-manual-cu.css" afterPath="$PROJECT_DIR$/public/css/wa-manual-cu.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-manual-cu.php" afterPath="$PROJECT_DIR$/wp-manual-cu.php" />
+    </list>
+    <ignored path="wp-manual-cu.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="wp-manual-cu" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="wp-manual-cu.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wp-manual-cu.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.4117646">
+              <caret line="133" column="26" selection-start-line="133" selection-start-column="26" selection-end-line="133" selection-end-column="26" />
+              <folding>
+                <marker date="1436786059000" expanded="true" signature="1123:1303" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="1157:1296" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="2934:3508" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="2981:3131" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="3167:3316" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="3352:3501" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="3794:4368" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="3841:3991" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4027:4176" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4212:4361" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4605:5106" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4628:4851" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4628:5106" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4685:4840" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4875:5099" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="4932:5088" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="5529:7705" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="5529:7712" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="5558:7705" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="5559:7695" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="5600:7694" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="5682:5998" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="5764:5979" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="6052:7265" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="6132:6456" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="6218:6433" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="6530:6851" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="6615:6828" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="6925:7246" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="7010:7223" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="7360:7679" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="7443:7660" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="9337:9477" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="9502:13649" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="9522:13641" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="9552:13632" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="9637:13622" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="9713:9809" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="10955:10972" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="11008:11028" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="11029:11133" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="11705:11722" placeholder="..." />
+                <marker date="1436786059000" expanded="false" signature="11761:11781" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="11782:11861" placeholder="..." />
+                <marker date="1436786059000" expanded="true" signature="12689:12763" placeholder="..." />
+                <marker date="1436786059000" expanded="false" signature="13591:13608" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wa-manual-cu.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/css/wa-manual-cu.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.45920303">
+              <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/wp-manual-cu.php" />
+        <option value="$PROJECT_DIR$/public/css/wa-manual-cu.css" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1680" />
+    <option name="height" value="979" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Spelling</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Blade files</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-manual-cu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-manual-cu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-manual-cu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-manual-cu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-manual-cu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-manual-cu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-manual-cu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="211" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="213" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="216" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1010" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="211" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="213" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="216" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1010" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8091b190-3a5a-4b35-8315-56d61b2938ce" name="Default" comment="" />
+      <created>1436783231026</created>
+      <option name="number" value="Default" />
+      <updated>1436783231026</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1680" height="979" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32967034" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="WordPressConfiguration" enabled="true">
+    <wordpressPath>$PROJECT_DIR$/../../..</wordpressPath>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/wp-manual-cu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.4117646">
+          <caret line="133" column="26" selection-start-line="133" selection-start-column="26" selection-end-line="133" selection-end-column="26" />
+          <folding>
+            <marker date="1436786059000" expanded="true" signature="1123:1303" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="1157:1296" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="2934:3508" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="2981:3131" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="3167:3316" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="3352:3501" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="3794:4368" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="3841:3991" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4027:4176" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4212:4361" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4605:5106" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4628:4851" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4628:5106" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4685:4840" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4875:5099" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="4932:5088" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="5529:7705" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="5529:7712" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="5558:7705" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="5559:7695" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="5600:7694" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="5682:5998" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="5764:5979" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="6052:7265" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="6132:6456" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="6218:6433" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="6530:6851" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="6615:6828" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="6925:7246" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="7010:7223" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="7360:7679" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="7443:7660" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="9337:9477" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="9502:13649" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="9522:13641" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="9552:13632" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="9637:13622" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="9713:9809" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="10955:10972" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="11008:11028" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="11029:11133" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="11705:11722" placeholder="..." />
+            <marker date="1436786059000" expanded="false" signature="11761:11781" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="11782:11861" placeholder="..." />
+            <marker date="1436786059000" expanded="true" signature="12689:12763" placeholder="..." />
+            <marker date="1436786059000" expanded="false" signature="13591:13608" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/wa-manual-cu.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45920303">
+          <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -12,6 +12,7 @@ $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
 
 const HOOK_DEFAULT_MIDDLE = 'alienship_post_after';
 const HOOK_DEFAULT_HORSESHOE = 'genesis_before_header';
+const HOOK_DEFAULT_STICKY = 'genesis_before_header';
 const HOOK_DEFAULT_FOOTER = 'wp_footer';
 
 // Enable shortcodes in widget-text
@@ -54,6 +55,7 @@ add_action('admin_menu', function() {
 
 add_action(getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE), 'add_middle_banners');
 add_action(getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE), 'add_horseshoe_banners');
+add_action(getOptionOrDefault('theme-hook-sticky', HOOK_DEFAULT_STICKY), 'add_sticky_banners');
 add_action(getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER), 'add_footer_banners');
 
 /**
@@ -122,6 +124,28 @@ HTML;
     echo $output;
 }
 
+function add_sticky_banners() {
+    $stickyLeft = getOptionOrDefault('sticky-left');
+    $stickyRight = getOptionOrDefault('sticky-right');
+
+    $output = <<<HTML
+<div class="bonnier-banner-container sticky">
+    <div class="left">
+        <div class="banner" data-listen="sticky-banner">
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$stickyLeft;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+    </div>
+    <div class="right">
+        <div class="banner" data-listen="sticky-banner">
+            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$stickyRight;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        </div>
+    </div>
+</div>
+HTML;
+
+    echo $output;
+}
+
 function add_horseshoe_banners() {
     global $publicFolder;
 
@@ -134,7 +158,7 @@ function add_horseshoe_banners() {
 
     $output = <<<HTML
 <div class="bonnier-wrapper">
-    <div class="horseshoe" data-banner-horseshoe>
+     <div class="horseshoe">
         <div class="horseshoe-container">
             <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
                 <div id="EAS_fif_$sidebannerLeft"></div>
@@ -192,6 +216,7 @@ function mcu_settings_page() {
 
     $middleHook = getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE);
     $horseshoeHook = getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE);
+    $stickyHook = getOptionOrDefault('theme-hook-sticky', HOOK_DEFAULT_STICKY);
     $footerHook = getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER);
 
 
@@ -205,6 +230,9 @@ function mcu_settings_page() {
 
     $sidebannerLeft = getOptionOrDefault('sidebanner-left', NULL);
     $sidebannerRight = getOptionOrDefault('sidebanner-right', NULL);
+
+    $stickyLeft = getOptionOrDefault('sticky-left');
+    $stickyRight = getOptionOrDefault('sticky-right');
 
     $desktopFooter = getOptionOrDefault('desktop-footer', NULL);
     $tabletFooter = getOptionOrDefault('tablet-footer', NULL);
@@ -247,6 +275,20 @@ function mcu_settings_page() {
 
                 <label for='mobile-middle'>Right</label>
 				<input type='text' class='form-control form-group' placeholder='Sidebanner right' value='$sidebannerRight' name='sidebanner-right' />
+
+				<h3 style="padding-top:30px;">Sticky banners</h3>
+				<p style="padding-bottom:20px;">
+			        Content units that will be displayed as sticky banners on each side of the page.
+			    </p>
+
+				<label for="theme-hook">Hook</label>
+				<input type="text" class="form-control form-group" placeholder="Hook for outputting the banners" value="$stickyHook" name="theme-hook-horseshoe" />
+
+				<label for="mobile-middle" class="padding-t">Left</label>
+				<input type="text" class="form-control form-group" placeholder="Desktop" value="$stickyLeft" name="sticky-left" />
+
+				<label for="mobile-middle">Right</label>
+				<input type="text" class="form-control form-group" placeholder="Tablet" value='$stickyRight' name="sticky-right" />
 
                 <h3 style="padding-top:30px;">Middle banners</h3>
 			    <p style="padding-bottom:20px;">
