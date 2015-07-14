@@ -31,7 +31,9 @@ To only change offset on the left/right:
 If you want to manually add a banners somewhere, you can use the shortcode.
 
 ```html
-[banner cu="xxxxxx" offset=""]
+[banner sticky="true" cu="xxxxxx" offset="" parent-container=""]
 ```
+sticky = (bool) If set to true, the banner will remain on screen while scrolling
 cu = Content Unit number
-offset = top Offset on the banner in pixels
+offset = top Offset in pixels where the banner will start to be sticky (default = calculates the offset itself)
+parent-container = container which the sticky banner will scroll inside
