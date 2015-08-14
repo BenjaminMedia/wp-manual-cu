@@ -3,9 +3,9 @@
 Plugin Name: WordPress Manual Content Units
 Plugin URI: https://github.com/BenjaminMedia/wp-manual-cu
 Description: Plugin that allows you to manually add Specific Content Units to WordPress
-Author: Frederik Rabøl & Alf Henderson
-Version: 0.5
-Author URI: http://rabol.co
+Author: Simon Sessingø, Frederik Rabøl & Alf Henderson
+Version: 1.1.0
+Author URI: http://www.bonnierpublications.com
 */
 
 $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
@@ -256,7 +256,7 @@ function mcu_settings_page() {
 
                 <h3 style="padding-top:30px;">Middle banners</h3>
 			    <p style="padding-bottom:20px;">
-			        Content units that will be displayed between each post.
+			        Content units that will be displayed ever 3 posts.
 			    </p>
 
 				<label for="theme-hook">Hook</label>
