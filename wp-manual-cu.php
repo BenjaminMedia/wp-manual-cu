@@ -262,7 +262,7 @@ function mcu_settings_page() {
                     Content units that will be displayed in the horseshoe (top of the page).
                 </p>
 
-                <label for="theme-hook">Hook</label>
+                <label for="theme-hook">Theme Hook</label>
                 <input type="text" class="form-control form-group" placeholder="Hook for outputting the horseshoe" value="$horseshoeHook" name="theme-hook-horseshoe" />
 
                 <label for="mobile-middle" class="padding-t">Desktop top</label>
@@ -286,7 +286,7 @@ function mcu_settings_page() {
                 </p>
 
                 <label for="theme-hook">Hook</label>
-                <input type="text" class="form-control form-group" placeholder="Hook for outputting the banners" value="$stickyHook" name="theme-hook-horseshoe" />
+                <input type="text" class="form-control form-group" placeholder="Hook for outputting the banners" value="$stickyHook" name="theme-hook-sticky" />
 
                 <label for="mobile-middle" class="padding-t">Left</label>
                 <input type="text" class="form-control form-group" placeholder="Desktop" value="$stickyLeft" name="sticky-left" />
