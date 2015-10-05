@@ -33,11 +33,11 @@ function insert_banner($attrs) {
 
     if(!is_null($cu)) {
         $output = <<<HTML
-<div class="bonnier-banner-container">
-    <div class="banner"$isSticky>
-        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$cu;cre=mu;js=y;pageviewid=;target=_blank'></script>
-    </div>
-</div>
+        <div class="bonnier-banner-container">
+            <div class="banner"$isSticky>
+                <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$cu;cre=mu;js=y;pageviewid=;target=_blank'></script>
+            </div>
+        </div>
 HTML;
         return $output;
     }
@@ -74,6 +74,9 @@ add_action('wp_enqueue_scripts', function() {
     global $publicFolder;
 
     wp_enqueue_style('wa-manual-cu-css', $publicFolder . '/css/wa-manual-cu.css');
+    if (getOptionOrDefault('load-eas-functions', false) ? "1": bool) {
+        wp_enqueue_script('EAS-functions', $publicFolder . '/js/emediate-functions.js');
+    }
     wp_enqueue_script('EAS-fif', $publicFolder . '/js/EAS_fif.js');
     wp_enqueue_script('wa-manual-cu-js', $publicFolder . '/js/wa-manual-cu.js');
 }, 999);
@@ -81,21 +84,38 @@ add_action('wp_enqueue_scripts', function() {
 
 
 function add_footer_banners() {
+    global $publicFolder;
+
     $footerMobile = getOptionOrDefault('mobile-footer');
     $footerTablet = getOptionOrDefault('tablet-footer');
     $footerDesktop = getOptionOrDefault('desktop-footer');
 
+    /*
+     *
+     * document.addEventListener("DOMContentLoaded", function(event) {
+            var bannerScriptLarge = document.createElement('script');
+            bannerScriptLarge.setAttribute('src','http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=;target=_blank' + eas.hlp.getCxProfileCookieData());
+            document.getElementById('footer-banners').appendChild(bannerScriptLarge);
+        });
+     * */
+
     $output = <<<HTML
-<div class="bonnier-wrapper">
-    <div class='banner visible-md visible-lg'>
-        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=;target=_blank'></script>
+<div id="footer-banners" class="bonnier-wrapper">
+    <div class='banner visible-md visible-lg' id="EAS_fif_$footerDesktop">
     </div>
-    <div class='banner visible-sm'>
-        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=;target=_blank'></script>
+    <script type="text/javascript">
+        EAS_load_fif('EAS_fif_$footerDesktop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 980, 180);
+    </script>
+    <div class='banner visible-sm' id="EAS_fif_$footerTablet">
     </div>
-    <div class='banner visible-xs'>
-        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$footerMobile;cre=mu;js=y;pageviewid=;target=_blank'></script>
+    <script type="text/javascript">
+        EAS_load_fif('EAS_fif_$footerTablet', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 728, 90);
+    </script>
+    <div class='banner visible-xs' id="EAS_fif_$footerMobile">
     </div>
+    <script type="text/javascript">
+        EAS_load_fif('EAS_fif_$footerMobile', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerMobile;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+    </script>
 </div>
 HTML;
 
@@ -165,31 +185,29 @@ function add_horseshoe_banners() {
      <div class="horseshoe">
         <div class="horseshoe-container">
             <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
-                <div id="EAS_fif_$sidebannerLeft"></div>
-                <script>
-                    EAS_load_fif("EAS_fif_$sidebannerLeft", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerLeft;cre=mu;js=y;pageviewid=;target=_blank", 240, 600);
-                </script>
+                    <div id="EAS_fif_$sidebannerLeft"></div>
+                    <script>
+                        EAS_load_fif('EAS_fif_$sidebannerLeft', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerLeft;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 240, 600);
+                    </script>
             </div>
 
             <div class="top-banner" data-top-banner>
                 <div class="banner visible-md-lg gtm-banner" data-banner-md-lg>
                     <div id="EAS_fif_$desktopTop"></div>
                     <script>
-                        /* var params = eas.hlp.getCxProfileCookieData();*/
-                        /*EAS_load_fif("EAS_fif_$desktopTop", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=;target=_blank;" + params, 980, 150);*/
-                        EAS_load_fif("EAS_fif_$desktopTop", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=;target=_blank", 980, 150);
+                        EAS_load_fif('EAS_fif_$desktopTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 980, 180);
                     </script>
                 </div>
                 <div class="banner visible-sm gtm-banner" data-banner-sm>
                     <div id="EAS_fif_$tabletTop"></div>
                     <script>
-                        EAS_load_fif("EAS_fif_$tabletTop", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletTop;cre=mu;js=y;pageviewid=;target=_blank", 728, 150);
+                        EAS_load_fif('EAS_fif_$tabletTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 728, 150);
                     </script>
                 </div>
                 <div class="banner visible-xs gtm-banner" data-banner-xs>
                     <div id="EAS_fif_$mobileTop"></div>
                     <script>
-                        EAS_load_fif("EAS_fif_$mobileTop", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileTop;cre=mu;js=y;pageviewid=;target=_blank", 320, 150);
+                        EAS_load_fif('EAS_fif_$mobileTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 320, 150);
                     </script>
                 </div>
             </div>
@@ -243,6 +261,13 @@ function mcu_settings_page() {
     $desktopFooter = getOptionOrDefault('desktop-footer', NULL);
     $tabletFooter = getOptionOrDefault('tablet-footer', NULL);
     $mobileFooter = getOptionOrDefault('mobile-footer', NULL);
+
+    var_dump(getOptionOrDefault('load-eas-functions', false));
+
+    $loadEasFunctions =  getOptionOrDefault('load-eas-functions', false);
+    $loadEasTrue = $loadEasFunctions ? 'checked' : '';
+    $loadEasFalse = !$loadEasFunctions ? 'checked' : '';
+
 
     wp_enqueue_style( 'AdminBootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', array(), '', 'all' );
 
@@ -330,6 +355,14 @@ function mcu_settings_page() {
                 <label for="mobile-middle">Mobile top</label>
                 <input type="text" class="form-control form-group" placeholder="Mobile " value="$mobileFooter" name="mobile-footer" />
 
+
+                <h3 class="padding-t">General settings</h3>
+
+                <label for="">Load Eas js functions</label>
+                <input type="radio" class="form-control form-group" placeholder="Mobile " value="1"  $loadEasTrue name="load-eas-functions" />
+                <input type="radio" class="form-control form-group" placeholder="Mobile " value="0" $loadEasFalse name="load-eas-functions" />
+
+                <br>
 
                 <input type='submit' name='submit' value='Save' class='btn btn-primary' style="margin-top: 30px;" />
             </form>
