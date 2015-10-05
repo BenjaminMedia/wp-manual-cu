@@ -81,9 +81,9 @@ add_action('wp_enqueue_scripts', function() {
 
 
 function add_footer_banners() {
-    $footerMobile = getOptionOrDefault('desktop-footer');
+    $footerMobile = getOptionOrDefault('mobile-footer');
     $footerTablet = getOptionOrDefault('tablet-footer');
-    $footerDesktop = getOptionOrDefault('mobile-footer');
+    $footerDesktop = getOptionOrDefault('desktop-footer');
 
     $output = <<<HTML
 <div class="bonnier-wrapper">
@@ -175,6 +175,8 @@ function add_horseshoe_banners() {
                 <div class="banner visible-md-lg gtm-banner" data-banner-md-lg>
                     <div id="EAS_fif_$desktopTop"></div>
                     <script>
+                        /* var params = eas.hlp.getCxProfileCookieData();*/
+                        /*EAS_load_fif("EAS_fif_$desktopTop", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=;target=_blank;" + params, 980, 150);*/
                         EAS_load_fif("EAS_fif_$desktopTop", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=;target=_blank", 980, 150);
                     </script>
                 </div>
@@ -289,10 +291,10 @@ function mcu_settings_page() {
                 <input type="text" class="form-control form-group" placeholder="Hook for outputting the banners" value="$stickyHook" name="theme-hook-sticky" />
 
                 <label for="mobile-middle" class="padding-t">Left</label>
-                <input type="text" class="form-control form-group" placeholder="Desktop" value="$stickyLeft" name="sticky-left" />
+                <input type="text" class="form-control form-group" placeholder="Sticky Left" value="$stickyLeft" name="sticky-left" />
 
                 <label for="mobile-middle">Right</label>
-                <input type="text" class="form-control form-group" placeholder="Tablet" value='$stickyRight' name="sticky-right" />
+                <input type="text" class="form-control form-group" placeholder="Sticky Right" value='$stickyRight' name="sticky-right" />
 
                 <h3 style="padding-top:30px;">Middle banners</h3>
                 <p style="padding-bottom:20px;">
@@ -304,11 +306,11 @@ function mcu_settings_page() {
                 <input type="text" class="form-control form-group" placeholder="Hook for executing middle bannerts" value="$middleHook" name="theme-hook-middle" />
 
                 <label for='dekstop-middle' class=padding-t>Desktop middle</label>
-                <input type='text' class='form-control form-group' placeholder='Desktop' value='$desktopMiddle' name='desktop-middle' />
+                <input type='text' class='form-control form-group' placeholder='Desktop Middle' value='$desktopMiddle' name='desktop-middle' />
                 <label for='tablet-middle'>Tablet middle</label>
-                <input type='text' class='form-control form-group' placeholder='Tablet' value='$tabletMiddle' name='tablet-middle' />
+                <input type='text' class='form-control form-group' placeholder='Tablet Middle' value='$tabletMiddle' name='tablet-middle' />
                 <label for='mobile-middle'>Mobile middle</label>
-                <input type='text' class='form-control form-group' placeholder='Mobile' value='$mobileMiddle' name='mobile-middle' />
+                <input type='text' class='form-control form-group' placeholder='Mobile Middle' value='$mobileMiddle' name='mobile-middle' />
 
                 <h3 class="padding-t">Footer banners</h3>
 
@@ -320,13 +322,13 @@ function mcu_settings_page() {
                 <input type="text" class="form-control form-group" placeholder="Hook for executing footer banners" value="$footerHook" name="theme-hook-footer" />
 
                 <label for="mobile-middle" class="padding-t">Desktop</label>
-                <input type='text' class='form-control form-group' placeholder='Desktop' value='$desktopFooter' name='desktop-footer' />
+                <input type='text' class='form-control form-group' placeholder='Desktop footer' value='$desktopFooter' name='desktop-footer' />
 
                 <label for="mobile-middle">Tablet</label>
-                <input type='text' class="form-control form-group" placeholder="Tablet" value="$tabletFooter" name="tablet-footer" />
+                <input type='text' class="form-control form-group" placeholder="Tablet footer" value="$tabletFooter" name="tablet-footer" />
 
                 <label for="mobile-middle">Mobile top</label>
-                <input type="text" class="form-control form-group" placeholder="Mobile" value="$mobileFooter" name="mobile-footer" />
+                <input type="text" class="form-control form-group" placeholder="Mobile " value="$mobileFooter" name="mobile-footer" />
 
 
                 <input type='submit' name='submit' value='Save' class='btn btn-primary' style="margin-top: 30px;" />
