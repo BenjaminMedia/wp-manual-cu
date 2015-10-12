@@ -262,8 +262,6 @@ function mcu_settings_page() {
     $tabletFooter = getOptionOrDefault('tablet-footer', NULL);
     $mobileFooter = getOptionOrDefault('mobile-footer', NULL);
 
-    var_dump(getOptionOrDefault('load-eas-functions', false));
-
     $loadEasFunctions =  getOptionOrDefault('load-eas-functions', false);
     $loadEasTrue = $loadEasFunctions ? 'checked' : '';
     $loadEasFalse = !$loadEasFunctions ? 'checked' : '';
