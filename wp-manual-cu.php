@@ -126,6 +126,8 @@ function add_middle_banners() {
     $desktopMiddle = getOptionOrDefault('desktop-middle');
     $tabletMiddle = getOptionOrDefault('tablet-middle');
     $mobileMiddle = getOptionOrDefault('mobile-middle');
+    $postsBetweenBanners = getOptionOrDefault('posts-between-banners', 1);
+    $postsBeforeBanners = getOptionOrDefault('posts-before-banners', 0);
 
     $output = <<<HTML
 <div class="bonnier-wrapper">
@@ -143,8 +145,10 @@ HTML;
 
     global $postCount;
     $postCount++;
-    if( ($postCount % 3) == 0) {
-        echo $output;
+    if($postCount >= $postsBeforeBanners){
+        if( ($postCount % $postsBetweenBanners++) == 0) {
+            echo $output;
+        }
     }
 }
 
@@ -265,6 +269,8 @@ function mcu_settings_page() {
     $loadEasFunctions =  getOptionOrDefault('load-eas-functions', false);
     $loadEasTrue = $loadEasFunctions ? 'checked' : '';
     $loadEasFalse = !$loadEasFunctions ? 'checked' : '';
+    $postsBetweenBanners = getOptionOrDefault('posts-between-banners', 1);
+    $postsBeforeBanners = getOptionOrDefault('posts-before-banners', 0);
 
 
     wp_enqueue_style( 'AdminBootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', array(), '', 'all' );
@@ -361,6 +367,12 @@ function mcu_settings_page() {
                 <input type="radio" class="form-control form-group" placeholder="Mobile " value="0" $loadEasFalse name="load-eas-functions" />
 
                 <br>
+
+                <h3 class="padding-t">Posts between Banners</h3>
+                <input type="text" class="form-control form-group" value="$postsBetweenBanners" name="posts-between-banners">
+
+                <h3 class="padding-t">Posts Before first Banners</h3>
+                <input type="text" class="form-control form-group" value="$postsBeforeBanners" name="posts-before-banners">
 
                 <input type='submit' name='submit' value='Save' class='btn btn-primary' style="margin-top: 30px;" />
             </form>
