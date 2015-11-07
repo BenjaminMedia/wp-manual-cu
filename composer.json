@@ -1,0 +1,11 @@
+{
+  "name": "benjaminmedia/wp-manual-cu",
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/BenjaminMedia/wp-manual-cu",
+  "license": "GPLv3",
+  "description": "A plugin that allows you to manually add Specific Content Units to WordPress",
+  "keywords": ["plugin"],
+  "require": {
+    "composer/installers": "~1.0.6"
+  }
+}
