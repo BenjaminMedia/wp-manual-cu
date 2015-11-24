@@ -74,7 +74,7 @@ add_action('wp_enqueue_scripts', function() {
     global $publicFolder;
 
     wp_enqueue_style('wa-manual-cu-css', $publicFolder . '/css/wa-manual-cu.css');
-    if (getOptionOrDefault('load-eas-functions', false) ? "1": bool) {
+    if (getOptionOrDefault('load-eas-functions', false)) {
         wp_enqueue_script('EAS-functions', $publicFolder . '/js/emediate-functions.js');
     }
     wp_enqueue_script('EAS-fif', $publicFolder . '/js/EAS_fif.js');
