@@ -130,7 +130,7 @@ function add_middle_banners() {
     $postsBetweenBanners = getOptionOrDefault('posts-between-banners', 1);
     $postsBeforeBanners = getOptionOrDefault('posts-before-banners', 0);
 
-    $max_posts_per_page = get_option('posts_per_page');
+    $maxPostsPerPage = get_option('posts_per_page');
 
     $output = <<<HTML
 <div class="bonnier-wrapper">
@@ -161,7 +161,7 @@ HTML;
     global $postCount;
     $postCount++;
     if($postCount >= $postsBeforeBanners){
-        if( (($postCount % $postsBetweenBanners++) == 0) && ($max_posts_per_page > $postCount)) {
+        if( (($postCount % $postsBetweenBanners++) == 0) && ($maxPostsPerPage > $postCount)) {
             echo $output;
         }
     }
