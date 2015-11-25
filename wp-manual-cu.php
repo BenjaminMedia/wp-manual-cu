@@ -14,6 +14,7 @@ const HOOK_DEFAULT_MIDDLE = 'genesis_after_entry';
 const HOOK_DEFAULT_HORSESHOE = 'genesis_before_header';
 const HOOK_DEFAULT_STICKY = 'genesis_before_header';
 const HOOK_DEFAULT_FOOTER = 'wp_footer';
+$postCount = 0;
 
 // Enable shortcodes in widget-text
 add_filter('widget_text', 'do_shortcode');
