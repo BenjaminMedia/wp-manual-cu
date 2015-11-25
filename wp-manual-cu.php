@@ -162,11 +162,7 @@ HTML;
     $postCount++;
     if($postCount >= $postsBeforeBanners){
         if( (($postCount % $postsBetweenBanners++) == 0) && ($max_posts_per_page > $postCount)) {
-            echo $postCount." out of ".$max_posts_per_page;
             echo $output;
-        }
-        else {
-            echo "THIS IS THE LAST POST = NO BANNERS";
         }
     }
 }
