@@ -133,30 +133,30 @@ function add_middle_banners() {
 
     $maxPostsPerPage = get_option('posts_per_page');
 
-    $output = <<<HTML
-<div class="bonnier-wrapper">
-        <div class='banner visible-md visible-lg' id="EAS_fif_$desktopMiddle">
-        </div>
-        <script type="text/javascript">
-            EAS_load_fif('EAS_fif_$desktopMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-        </script>
-        <div class='banner visible-sm' id="EAS_fif_$tabletMiddle">
-        </div>
-        <script type="text/javascript">
-            EAS_load_fif('EAS_fif_$tabletMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-        </script>
-        <div class='banner visible-xs' id="EAS_fif_$mobileMiddle">
-        </div>
-        <script type="text/javascript">
-            EAS_load_fif('EAS_fif_$mobileMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-        </script>
-</div>
-HTML;
-
     global $postCount;
     $postCount++;
     if($postCount >= $postsBeforeBanners){
         if( (($postCount % $postsBetweenBanners++) == 0) && ($maxPostsPerPage > $postCount)) {
+            $output = <<<HTML
+<div class="bonnier-wrapper">
+        <div class='banner visible-md visible-lg' id="EAS_fif_$desktopMiddle$postCount">
+        </div>
+        <script type="text/javascript">
+            EAS_load_fif('EAS_fif_$desktopMiddle$postCount', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+        </script>
+        <div class='banner visible-sm' id="EAS_fif_$tabletMiddle$postCount">
+        </div>
+        <script type="text/javascript">
+            EAS_load_fif('EAS_fif_$tabletMiddle$postCount', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+        </script>
+        <div class='banner visible-xs' id="EAS_fif_$mobileMiddle$postCount">
+        </div>
+        <script type="text/javascript">
+            EAS_load_fif('EAS_fif_$mobileMiddle$postCount', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+        </script>
+</div>
+HTML;
+
             echo $output;
         }
     }
