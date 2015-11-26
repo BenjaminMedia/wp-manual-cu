@@ -136,21 +136,21 @@ function add_middle_banners() {
     $output = <<<HTML
 <div class="bonnier-wrapper">
     <div class='banner visible-md visible-lg'>
-        <div class='banner visible-xs' id="EAS_fif_$desktopMiddle">
+        <div id="EAS_fif_$desktopMiddle">
         </div>
         <script type="text/javascript">
             EAS_load_fif('EAS_fif_$desktopMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
         </script>
     </div>
     <div class='banner visible-sm'>
-        <div class='banner visible-xs' id="EAS_fif_$tabletMiddle">
+        <div id="EAS_fif_$tabletMiddle">
         </div>
         <script type="text/javascript">
             EAS_load_fif('EAS_fif_$tabletMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
         </script>
     </div>
     <div class='banner visible-xs'>
-        <div class='banner visible-xs' id="EAS_fif_$mobileMiddle">
+        <div id="EAS_fif_$mobileMiddle">
         </div>
         <script type="text/javascript">
             EAS_load_fif('EAS_fif_$mobileMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
@@ -177,7 +177,7 @@ function add_sticky_banners() {
 <div class="bonnier-banner-container sticky">
     <div class="left">
         <div class="banner" data-listen="sticky-banner">
-            <div class='banner visible-xs' id="EAS_fif_$stickyLeft">
+            <div id="EAS_fif_$stickyLeft">
             </div>
             <script type="text/javascript">
                 EAS_load_fif('EAS_fif_$stickyLeft', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyLeft;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
@@ -186,7 +186,7 @@ function add_sticky_banners() {
     </div>
     <div class="right">
         <div class="banner" data-listen="sticky-banner">
-            <div class='banner visible-xs' id="EAS_fif_$stickyRight">
+            <div id="EAS_fif_$stickyRight">
             </div>
             <script type="text/javascript">
                 EAS_load_fif('EAS_fif_$stickyRight', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyRight;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
