@@ -14,6 +14,7 @@ const HOOK_DEFAULT_MIDDLE = 'genesis_after_entry';
 const HOOK_DEFAULT_HORSESHOE = 'genesis_before_header';
 const HOOK_DEFAULT_STICKY = 'genesis_before_header';
 const HOOK_DEFAULT_FOOTER = 'wp_footer';
+$postCount = 0;
 
 // Enable shortcodes in widget-text
 add_filter('widget_text', 'do_shortcode');
@@ -123,22 +124,37 @@ HTML;
 }
 
 function add_middle_banners() {
+    global $publicFolder;
     $desktopMiddle = getOptionOrDefault('desktop-middle');
     $tabletMiddle = getOptionOrDefault('tablet-middle');
     $mobileMiddle = getOptionOrDefault('mobile-middle');
     $postsBetweenBanners = getOptionOrDefault('posts-between-banners', 1);
     $postsBeforeBanners = getOptionOrDefault('posts-before-banners', 0);
 
+    $maxPostsPerPage = get_option('posts_per_page');
+
     $output = <<<HTML
 <div class="bonnier-wrapper">
     <div class='banner visible-md visible-lg'>
-        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        <div class='banner visible-xs' id="EAS_fif_$desktopMiddle">
+        </div>
+        <script type="text/javascript">
+            EAS_load_fif('EAS_fif_$desktopMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+        </script>
     </div>
     <div class='banner visible-sm'>
-        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        <div class='banner visible-xs' id="EAS_fif_$tabletMiddle">
+        </div>
+        <script type="text/javascript">
+            EAS_load_fif('EAS_fif_$tabletMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+        </script>
     </div>
     <div class='banner visible-xs'>
-        <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=;target=_blank'></script>
+        <div class='banner visible-xs' id="EAS_fif_$mobileMiddle">
+        </div>
+        <script type="text/javascript">
+            EAS_load_fif('EAS_fif_$mobileMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+        </script>
     </div>
 </div>
 HTML;
@@ -146,7 +162,7 @@ HTML;
     global $postCount;
     $postCount++;
     if($postCount >= $postsBeforeBanners){
-        if( ($postCount % $postsBetweenBanners++) == 0) {
+        if( (($postCount % $postsBetweenBanners++) == 0) && ($maxPostsPerPage > $postCount)) {
             echo $output;
         }
     }
@@ -155,17 +171,26 @@ HTML;
 function add_sticky_banners() {
     $stickyLeft = getOptionOrDefault('sticky-left');
     $stickyRight = getOptionOrDefault('sticky-right');
+    global $publicFolder;
 
     $output = <<<HTML
 <div class="bonnier-banner-container sticky">
     <div class="left">
         <div class="banner" data-listen="sticky-banner">
-            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$stickyLeft;cre=mu;js=y;pageviewid=;target=_blank'></script>
+            <div class='banner visible-xs' id="EAS_fif_$stickyLeft">
+            </div>
+            <script type="text/javascript">
+                EAS_load_fif('EAS_fif_$stickyLeft', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyLeft;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+            </script>
         </div>
     </div>
     <div class="right">
         <div class="banner" data-listen="sticky-banner">
-            <script type='text/javascript' src='http://eas4.emediate.eu/eas?cu=$stickyRight;cre=mu;js=y;pageviewid=;target=_blank'></script>
+            <div class='banner visible-xs' id="EAS_fif_$stickyRight">
+            </div>
+            <script type="text/javascript">
+                EAS_load_fif('EAS_fif_$stickyRight', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyRight;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
+            </script>
         </div>
     </div>
 </div>
@@ -284,7 +309,7 @@ function mcu_settings_page() {
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-            <!--<h2>Manage Content Units</h2> -->
+            <h2>Manage Content Units</h2>
 
             <form method="post" action=''>
                 <h3 class="padding-t">Horseshoe banners</h3>
@@ -293,7 +318,7 @@ function mcu_settings_page() {
                     Content units that will be displayed in the horseshoe (top of the page).
                 </p>
 
-                <label for="theme-hook">Theme Hook</label>
+                <label for="theme-hook">Horseshoe Hook</label>
                 <input type="text" class="form-control form-group" placeholder="Hook for outputting the horseshoe" value="$horseshoeHook" name="theme-hook-horseshoe" />
 
                 <label for="mobile-middle" class="padding-t">Desktop top</label>
@@ -316,7 +341,7 @@ function mcu_settings_page() {
                     Content units that will be displayed as sticky banners on each side of the page.
                 </p>
 
-                <label for="theme-hook">Hook</label>
+                <label for="theme-hook">Sticky Banners Hook</label>
                 <input type="text" class="form-control form-group" placeholder="Hook for outputting the banners" value="$stickyHook" name="theme-hook-sticky" />
 
                 <label for="mobile-middle" class="padding-t">Left</label>
@@ -330,16 +355,16 @@ function mcu_settings_page() {
                     Content units that will be displayed between each post.
                 </p>
 
-                <label for="theme-hook">Hook</label>
+                <label for="theme-hook">Middle Banner Hook</label>
 
-                <input type="text" class="form-control form-group" placeholder="Hook for executing middle bannerts" value="$middleHook" name="theme-hook-middle" />
+                <input type="text" class="form-control form-group" placeholder="Hook for executing middle banners" value="$middleHook" name="theme-hook-middle" />
 
                 <label for='dekstop-middle' class=padding-t>Desktop middle</label>
-                <input type='text' class='form-control form-group' placeholder='Desktop Middle' value='$desktopMiddle' name='desktop-middle' />
+                <input type='text' class='form-control form-group' placeholder='Middle Desktop' value='$desktopMiddle' name='desktop-middle' />
                 <label for='tablet-middle'>Tablet middle</label>
-                <input type='text' class='form-control form-group' placeholder='Tablet Middle' value='$tabletMiddle' name='tablet-middle' />
+                <input type='text' class='form-control form-group' placeholder='Middle Tablet' value='$tabletMiddle' name='tablet-middle' />
                 <label for='mobile-middle'>Mobile middle</label>
-                <input type='text' class='form-control form-group' placeholder='Mobile Middle' value='$mobileMiddle' name='mobile-middle' />
+                <input type='text' class='form-control form-group' placeholder='Middle Mobile' value='$mobileMiddle' name='mobile-middle' />
 
                 <h3 class="padding-t">Footer banners</h3>
 
@@ -351,13 +376,13 @@ function mcu_settings_page() {
                 <input type="text" class="form-control form-group" placeholder="Hook for executing footer banners" value="$footerHook" name="theme-hook-footer" />
 
                 <label for="mobile-middle" class="padding-t">Desktop</label>
-                <input type='text' class='form-control form-group' placeholder='Desktop footer' value='$desktopFooter' name='desktop-footer' />
+                <input type='text' class='form-control form-group' placeholder='Footer Desktop' value='$desktopFooter' name='desktop-footer' />
 
                 <label for="mobile-middle">Tablet</label>
-                <input type='text' class="form-control form-group" placeholder="Tablet footer" value="$tabletFooter" name="tablet-footer" />
+                <input type='text' class="form-control form-group" placeholder="Footer Tablet" value="$tabletFooter" name="tablet-footer" />
 
                 <label for="mobile-middle">Mobile top</label>
-                <input type="text" class="form-control form-group" placeholder="Mobile " value="$mobileFooter" name="mobile-footer" />
+                <input type="text" class="form-control form-group" placeholder="Footer Mobile" value="$mobileFooter" name="mobile-footer" />
 
 
                 <h3 class="padding-t">General settings</h3>
