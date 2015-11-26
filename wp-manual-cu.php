@@ -105,12 +105,12 @@ function add_footer_banners() {
     <div class='banner visible-md visible-lg' id="EAS_fif_$footerDesktop">
     </div>
     <script type="text/javascript">
-        EAS_load_fif('EAS_fif_$footerDesktop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 980, 180);
+        EAS_load_fif('EAS_fif_$footerDesktop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
     </script>
     <div class='banner visible-sm' id="EAS_fif_$footerTablet">
     </div>
     <script type="text/javascript">
-        EAS_load_fif('EAS_fif_$footerTablet', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 728, 90);
+        EAS_load_fif('EAS_fif_$footerTablet', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
     </script>
     <div class='banner visible-xs' id="EAS_fif_$footerMobile">
     </div>
@@ -216,7 +216,7 @@ function add_horseshoe_banners() {
             <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
                     <div id="EAS_fif_$sidebannerLeft"></div>
                     <script>
-                        EAS_load_fif('EAS_fif_$sidebannerLeft', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerLeft;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 240, 600);
+                        EAS_load_fif('EAS_fif_$sidebannerLeft', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerLeft;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
                     </script>
             </div>
 
@@ -224,19 +224,19 @@ function add_horseshoe_banners() {
                 <div class="banner visible-md-lg gtm-banner" data-banner-md-lg>
                     <div id="EAS_fif_$desktopTop"></div>
                     <script>
-                        EAS_load_fif('EAS_fif_$desktopTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 980, 180);
+                        EAS_load_fif('EAS_fif_$desktopTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
                     </script>
                 </div>
                 <div class="banner visible-sm gtm-banner" data-banner-sm>
                     <div id="EAS_fif_$tabletTop"></div>
                     <script>
-                        EAS_load_fif('EAS_fif_$tabletTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 728, 150);
+                        EAS_load_fif('EAS_fif_$tabletTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
                     </script>
                 </div>
                 <div class="banner visible-xs gtm-banner" data-banner-xs>
                     <div id="EAS_fif_$mobileTop"></div>
                     <script>
-                        EAS_load_fif('EAS_fif_$mobileTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 320, 150);
+                        EAS_load_fif('EAS_fif_$mobileTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
                     </script>
                 </div>
             </div>
@@ -244,7 +244,7 @@ function add_horseshoe_banners() {
             <div class="side-banner banner-right visible-md-lg gtm-banner" data-banner-md-lg>
                 <div id="EAS_fif_$sidebannerRight"></div>
                 <script>
-                    EAS_load_fif("EAS_fif_$sidebannerRight", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerRight;cre=mu;js=y;pageviewid=;target=_blank", 240, 600);
+                    EAS_load_fif("EAS_fif_$sidebannerRight", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerRight;cre=mu;js=y;pageviewid=;target=_blank", 0, 0);
                 </script>
             </div>
         </div>
