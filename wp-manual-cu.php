@@ -135,27 +135,21 @@ function add_middle_banners() {
 
     $output = <<<HTML
 <div class="bonnier-wrapper">
-    <div class='banner visible-md visible-lg'>
-        <div id="EAS_fif_$desktopMiddle">
+        <div class='banner visible-md visible-lg' id="EAS_fif_$desktopMiddle">
         </div>
         <script type="text/javascript">
             EAS_load_fif('EAS_fif_$desktopMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
         </script>
-    </div>
-    <div class='banner visible-sm'>
-        <div id="EAS_fif_$tabletMiddle">
+        <div class='banner visible-sm' id="EAS_fif_$tabletMiddle">
         </div>
         <script type="text/javascript">
             EAS_load_fif('EAS_fif_$tabletMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
         </script>
-    </div>
-    <div class='banner visible-xs'>
-        <div id="EAS_fif_$mobileMiddle">
+        <div class='banner visible-xs' id="EAS_fif_$mobileMiddle">
         </div>
         <script type="text/javascript">
             EAS_load_fif('EAS_fif_$mobileMiddle', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
         </script>
-    </div>
 </div>
 HTML;
 
