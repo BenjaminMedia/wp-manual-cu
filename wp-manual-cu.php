@@ -10,10 +10,10 @@ Author URI: http://www.bonnierpublications.com
 
 $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
 
-const HOOK_DEFAULT_MIDDLE = 'genesis_after_entry';
-const HOOK_DEFAULT_HORSESHOE = 'genesis_before_header';
-const HOOK_DEFAULT_STICKY = 'genesis_before_header';
-const HOOK_DEFAULT_FOOTER = 'wp_footer';
+const HOOK_DEFAULT_MIDDLE = 'headway_after_entry_content';
+const HOOK_DEFAULT_HORSESHOE = 'headway_page_start';
+const HOOK_DEFAULT_STICKY = 'headway_page_start';
+const HOOK_DEFAULT_FOOTER = 'headway_footer_close';
 $postCount = 0;
 
 // Enable shortcodes in widget-text
@@ -169,7 +169,7 @@ function add_sticky_banners() {
 
     $output = <<<HTML
 <div class="bonnier-banner-container sticky">
-    <div class="left">
+    <div class="left visible-lg">
         <div class="banner" data-listen="sticky-banner">
             <div id="EAS_fif_$stickyLeft">
             </div>
@@ -178,7 +178,7 @@ function add_sticky_banners() {
             </script>
         </div>
     </div>
-    <div class="right">
+    <div class="right visible-lg">
         <div class="banner" data-listen="sticky-banner">
             <div id="EAS_fif_$stickyRight">
             </div>
