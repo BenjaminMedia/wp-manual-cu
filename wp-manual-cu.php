@@ -8,6 +8,8 @@ Version: 1.2
 Author URI: http://www.bonnierpublications.com
 */
 
+include('bannerGroup.php');
+
 $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
 
 const HOOK_DEFAULT_MIDDLE = 'headway_after_entry_content';
@@ -79,7 +81,8 @@ add_action('wp_enqueue_scripts', function() {
         wp_enqueue_script('EAS-functions', $publicFolder . '/js/emediate-functions.js');
     }
     wp_enqueue_script('EAS-fif', $publicFolder . '/js/EAS_fif.js');
-    wp_enqueue_script('wa-manual-cu-js', $publicFolder . '/js/wa-manual-cu.js');
+    //wp_enqueue_script('wa-manual-cu-js', $publicFolder . '/js/wa-manual-cu.js');
+    wp_enqueue_script('wa-manual-cu-js', $publicFolder . '/js/banners.js');
 }, 999);
 
 
@@ -87,163 +90,120 @@ add_action('wp_enqueue_scripts', function() {
 function add_footer_banners() {
     global $publicFolder;
 
-    $footerMobile = getOptionOrDefault('mobile-footer');
-    $footerTablet = getOptionOrDefault('tablet-footer');
     $footerDesktop = getOptionOrDefault('desktop-footer');
-
-    /*
-     *
-     * document.addEventListener("DOMContentLoaded", function(event) {
-            var bannerScriptLarge = document.createElement('script');
-            bannerScriptLarge.setAttribute('src','http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=;target=_blank' + eas.hlp.getCxProfileCookieData());
-            document.getElementById('footer-banners').appendChild(bannerScriptLarge);
-        });
-     * */
+    $footerTablet = getOptionOrDefault('tablet-footer');
+    $footerMobile = getOptionOrDefault('mobile-footer');
 
     $output = <<<HTML
-<div id="footer-banners" class="bonnier-wrapper">
-    <div class='banner visible-md visible-lg' id="EAS_fif_$footerDesktop">
+<div class="row" id="footer-banners">
+    <div class="col-sm-12">
+        <div class="visible-md-lg banner-wrapper text-center" data-banner-md-lg>
+            <div class="banner-min-height banner gtm-banner" data-banner-code="$footerDesktop" data-banner-target="true" id="banner-$footerDesktop"></div>
+        </div>
+
+        <div class="visible-sm banner-wrapper" data-banner-sm>
+            <div class="banner-min-height banner gtm-banner" data-banner-code="$footerTablet" data-banner-target="true"></div>
+        </div>
+
+        <div class="visible-xs banner-wrapper" data-banner-xs>
+            <div class="banner-min-height banner gtm-banner" data-banner-code="$footerMobile" data-banner-target="true"></div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-    <script type="text/javascript">
-        EAS_load_fif('EAS_fif_$footerDesktop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerDesktop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-    </script>
-    <div class='banner visible-sm' id="EAS_fif_$footerTablet">
-    </div>
-    <script type="text/javascript">
-        EAS_load_fif('EAS_fif_$footerTablet', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerTablet;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-    </script>
-    <div class='banner visible-xs' id="EAS_fif_$footerMobile">
-    </div>
-    <script type="text/javascript">
-        EAS_load_fif('EAS_fif_$footerMobile', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$footerMobile;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-    </script>
 </div>
 HTML;
 
-    echo $output;
+echo $output;
 }
 
 function add_middle_banners() {
-    global $publicFolder;
-    $desktopMiddle = getOptionOrDefault('desktop-middle');
-    $tabletMiddle = getOptionOrDefault('tablet-middle');
-    $mobileMiddle = getOptionOrDefault('mobile-middle');
-    $postsBetweenBanners = getOptionOrDefault('posts-between-banners', 1);
-    $postsBeforeBanners = getOptionOrDefault('posts-before-banners', 0);
+global $publicFolder;
+$desktopMiddle = getOptionOrDefault('desktop-middle');
+$tabletMiddle = getOptionOrDefault('tablet-middle');
+$mobileMiddle = getOptionOrDefault('mobile-middle');
+$postsBetweenBanners = getOptionOrDefault('posts-between-banners', 1);
+$postsBeforeBanners = getOptionOrDefault('posts-before-banners', 0);
 
-    $maxPostsPerPage = get_option('posts_per_page');
+$maxPostsPerPage = get_option('posts_per_page');
 
-    global $postCount;
-    $postCount++;
-    if($postCount >= $postsBeforeBanners){
+global $postCount;
+$postCount++;
+if($postCount >= $postsBeforeBanners){
         if( (($postCount % $postsBetweenBanners++) == 0) && ($maxPostsPerPage > $postCount)) {
-            $output = <<<HTML
-<div class="bonnier-wrapper">
-        <div class='banner visible-md visible-lg' id="EAS_fif_$desktopMiddle$postCount">
+        $output = <<<HTML
+        <div class="bonnier-wrapper visible-md-lg" data-banner-md-lg>
+          <div class='banner-min-height banner gtm-banner' id="banner-$desktopMiddle-$postCount" data-banner-code="$desktopMiddle" data-banner-target="true">
+          </div>
         </div>
-        <script type="text/javascript">
-            EAS_load_fif('EAS_fif_$desktopMiddle$postCount', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-        </script>
-        <div class='banner visible-sm' id="EAS_fif_$tabletMiddle$postCount">
+        <div class="bonnier-wrapper visible-md-lg" data-banner-sm>
+          <div class='banner-min-height banner gtm-banner' id="banner-$tabletMiddle-$postCount" data-banner-code="$tabletMiddle" data-banner-target="true">
+          </div>
         </div>
-        <script type="text/javascript">
-            EAS_load_fif('EAS_fif_$tabletMiddle$postCount', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-        </script>
-        <div class='banner visible-xs' id="EAS_fif_$mobileMiddle$postCount">
+        <div class="bonnier-wrapper visible-xs" data-banner-xs>
+          <div class='banner-min-height banner gtm-banner' id="banner-$mobileMiddle-$postCount" data-banner-code="$mobileMiddle" data-banner-target="true">
+          </div>
         </div>
-        <script type="text/javascript">
-            EAS_load_fif('EAS_fif_$mobileMiddle$postCount', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileMiddle;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-        </script>
-</div>
 HTML;
 
-            echo $output;
+        echo $output;
         }
     }
 }
 
 function add_sticky_banners() {
-    $stickyLeft = getOptionOrDefault('sticky-left');
-    $stickyRight = getOptionOrDefault('sticky-right');
-    global $publicFolder;
+$stickyLeft = getOptionOrDefault('sticky-left');
+$stickyRight = getOptionOrDefault('sticky-right');
+global $publicFolder;
 
-    $output = <<<HTML
-<div class="bonnier-banner-container sticky">
-    <div class="left visible-lg">
-        <div class="banner" data-listen="sticky-banner">
-            <div id="EAS_fif_$stickyLeft">
-            </div>
-            <script type="text/javascript">
-                EAS_load_fif('EAS_fif_$stickyLeft', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyLeft;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-            </script>
-        </div>
-    </div>
-    <div class="right visible-lg">
-        <div class="banner" data-listen="sticky-banner">
-            <div id="EAS_fif_$stickyRight">
-            </div>
-            <script type="text/javascript">
-                EAS_load_fif('EAS_fif_$stickyRight', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$stickyRight;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-            </script>
-        </div>
-    </div>
-</div>
+$output = <<<HTML
+    <h1 class="text-center">STICKY BANNERS YEAH!</h1>
 HTML;
 
-    echo $output;
+echo $output;
 }
 
 function add_horseshoe_banners() {
-    global $publicFolder;
+global $publicFolder;
 
-    $sidebannerLeft = getOptionOrDefault('sidebanner-left');
-    $sidebannerRight = getOptionOrDefault('sidebanner-right');
+$sidebannerLeft = getOptionOrDefault('sidebanner-left');
+$sidebannerRight = getOptionOrDefault('sidebanner-right');
+$stickyLeft = getOptionOrDefault('sticky-left');
+$stickyRight = getOptionOrDefault('sticky-right');
 
-    $desktopTop = getOptionOrDefault('desktop-top');
-    $tabletTop = getOptionOrDefault('tablet-top');
-    $mobileTop = getOptionOrDefault('mobile-top');
+$desktopTop = getOptionOrDefault('desktop-top');
+$tabletTop = getOptionOrDefault('tablet-top');
+$mobileTop = getOptionOrDefault('mobile-top');
 
-    $output = <<<HTML
-<div class="bonnier-wrapper">
-     <div class="horseshoe">
-        <div class="horseshoe-container">
-            <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
-                    <div id="EAS_fif_$sidebannerLeft"></div>
-                    <script>
-                        EAS_load_fif('EAS_fif_$sidebannerLeft', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerLeft;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-                    </script>
-            </div>
+$horseshoeBanners = new BannerGroup(['lg'=>$desktopTop,'sm'=>$tabletTop,'xs'=>$mobileTop],'Horseshoe Banners');
+$horseshoeBannerGroup = $horseshoeBanners->getHtmlCode();
+$output = <<<HTML
 
-            <div class="top-banner" data-top-banner>
-                <div class="banner visible-md-lg gtm-banner" data-banner-md-lg>
-                    <div id="EAS_fif_$desktopTop"></div>
-                    <script>
-                        EAS_load_fif('EAS_fif_$desktopTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$desktopTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-                    </script>
-                </div>
-                <div class="banner visible-sm gtm-banner" data-banner-sm>
-                    <div id="EAS_fif_$tabletTop"></div>
-                    <script>
-                        EAS_load_fif('EAS_fif_$tabletTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$tabletTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-                    </script>
-                </div>
-                <div class="banner visible-xs gtm-banner" data-banner-xs>
-                    <div id="EAS_fif_$mobileTop"></div>
-                    <script>
-                        EAS_load_fif('EAS_fif_$mobileTop', "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$mobileTop;cre=mu;js=y;pageviewid=" + EAS_pageviewid + "target=_blank" + eas.hlp.getCxProfileCookieData(), 0, 0);
-                    </script>
-                </div>
-            </div>
-
-            <div class="side-banner banner-right visible-md-lg gtm-banner" data-banner-md-lg>
-                <div id="EAS_fif_$sidebannerRight"></div>
-                <script>
-                    EAS_load_fif("EAS_fif_$sidebannerRight", "$publicFolder/EAS_fif.html", "http://eas4.emediate.eu/eas?cu=$sidebannerRight;cre=mu;js=y;pageviewid=;target=_blank", 0, 0);
-                </script>
-            </div>
+<div class="horseshoe" data-banner-horseshoe>
+    <div class="horseshoe-container">
+      <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
+        <div class="absolute text-center">
+            <div class="banner-min-height banner gtm-banner" data-banner-code="$sidebannerLeft" data-banner-target="true" id="banner-$sidebannerLeft"></div>
         </div>
+        <div class="fixed text-center static" data-listen="sticky-banner">
+            <div class="banner-min-height banner gtm-banner" data-banner-code="$stickyLeft" data-banner-target="true" id="banner-$stickyLeft"></div>
+        </div>
+      </div>
+
+      <div class="top-banner" data-top-banner>
+            $horseshoeBannerGroup
+      </div>
+
+      <div class="side-banner banner-right visible-md-lg" data-banner-md-lg>
+        <div class="absolute text-center">
+            <div class="banner-min-height banner gtm-banner" data-banner-code="$sidebannerRight" data-banner-target="true" id="banner-$sidebannerRight"></div>
+        </div>
+        <div class="fixed text-center static" data-listen="sticky-banner">
+            <div class="banner-min-height banner gtm-banner" data-banner-code="$stickyRight" data-banner-target="true" id="banner-$stickyRight"></div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
 HTML;
 
     echo $output;
