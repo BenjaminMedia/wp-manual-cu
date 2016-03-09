@@ -244,6 +244,10 @@
     float: left;
 }
 
+.hide, .bp-hide{
+    display: none;
+}
+
 .bonnier-banner-container.sticky .right {
     float: right;
     margin-right: 160px;
