@@ -8,7 +8,8 @@ Version: 1.2
 Author URI: http://www.bonnierpublications.com
 */
 
-include('bannerGroup.php');
+include_once('Banner.php');
+include_once('BannerGroup.php');
 
 $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
 
@@ -163,8 +164,6 @@ echo $output;
 }
 
 function add_horseshoe_banners() {
-global $publicFolder;
-
 $sidebannerLeft = getOptionOrDefault('sidebanner-left');
 $sidebannerRight = getOptionOrDefault('sidebanner-right');
 $stickyLeft = getOptionOrDefault('sticky-left');
@@ -174,39 +173,22 @@ $desktopTop = getOptionOrDefault('desktop-top');
 $tabletTop = getOptionOrDefault('tablet-top');
 $mobileTop = getOptionOrDefault('mobile-top');
 
-$horseshoeBanners = new BannerGroup(['lg'=>$desktopTop,'sm'=>$tabletTop,'xs'=>$mobileTop],'Horseshoe Banners');
-$horseshoeBannerGroup = $horseshoeBanners->getHtmlCode();
-$output = <<<HTML
-
-<div class="horseshoe" data-banner-horseshoe>
-    <div class="horseshoe-container">
-      <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
-        <div class="absolute text-center">
-            <div class="banner-min-height banner gtm-banner" data-banner-code="$sidebannerLeft" data-banner-target="true" id="banner-$sidebannerLeft"></div>
-        </div>
-        <div class="fixed text-center static" data-listen="sticky-banner">
-            <div class="banner-min-height banner gtm-banner" data-banner-code="$stickyLeft" data-banner-target="true" id="banner-$stickyLeft"></div>
-        </div>
-      </div>
-
-      <div class="top-banner" data-top-banner>
-            $horseshoeBannerGroup
-      </div>
-
-      <div class="side-banner banner-right visible-md-lg" data-banner-md-lg>
-        <div class="absolute text-center">
-            <div class="banner-min-height banner gtm-banner" data-banner-code="$sidebannerRight" data-banner-target="true" id="banner-$sidebannerRight"></div>
-        </div>
-        <div class="fixed text-center static" data-listen="sticky-banner">
-            <div class="banner-min-height banner gtm-banner" data-banner-code="$stickyRight" data-banner-target="true" id="banner-$stickyRight"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-HTML;
-
-    echo $output;
+$horseshoeBanners = new BannerGroup\BannerGroup('Horseshoe Banners',[
+    'banners' => [
+        'lg'=>$desktopTop,
+        'sm'=>$tabletTop,
+        'xs'=>$mobileTop,
+    ],
+    'left' => [
+        'side' => $sidebannerLeft,
+        'sticky' => $stickyLeft
+    ],
+    'right' => [
+        'side' => $sidebannerRight,
+        'sticky' => $stickyRight
+    ]
+], 'horseshoe');
+    echo $horseshoeBanners->getHtmlCode();
 }
 
 //settings page
