@@ -15,7 +15,6 @@ $publicFolder = plugin_dir_url( __FILE__ ) . 'public';
 
 const HOOK_DEFAULT_MIDDLE = 'headway_after_entry_content';
 const HOOK_DEFAULT_HORSESHOE = 'headway_page_start';
-const HOOK_DEFAULT_STICKY = 'headway_page_start';
 const HOOK_DEFAULT_FOOTER = 'headway_footer_close';
 $postCount = 0;
 
@@ -59,7 +58,6 @@ add_action('admin_menu', function() {
 
 add_action(getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE), 'add_middle_banners');
 add_action(getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE), 'add_horseshoe_banners');
-add_action(getOptionOrDefault('theme-hook-sticky', HOOK_DEFAULT_STICKY), 'add_sticky_banners');
 add_action(getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER), 'add_footer_banners');
 
 /**
@@ -89,26 +87,23 @@ add_action('wp_enqueue_scripts', function() {
 
 
 function add_footer_banners() {
-    global $publicFolder;
-
     $footerDesktop = getOptionOrDefault('desktop-footer');
     $footerTablet = getOptionOrDefault('tablet-footer');
     $footerMobile = getOptionOrDefault('mobile-footer');
 
+    $footerBannerGroup = (new \BannerGroup\BannerGroup('Middle Banners',
+        [
+            'banners' => [
+                'lg'=>$footerDesktop,
+                'sm'=>$footerTablet,
+                'xs'=>$footerMobile,
+            ]
+        ],'banner_group'))->getHtmlCode();
+
     $output = <<<HTML
 <div class="row" id="footer-banners">
     <div class="col-sm-12">
-        <div class="visible-md-lg banner-wrapper text-center" data-banner-md-lg>
-            <div class="banner-min-height banner gtm-banner" data-banner-code="$footerDesktop" data-banner-target="true" id="banner-$footerDesktop"></div>
-        </div>
-
-        <div class="visible-sm banner-wrapper" data-banner-sm>
-            <div class="banner-min-height banner gtm-banner" data-banner-code="$footerTablet" data-banner-target="true"></div>
-        </div>
-
-        <div class="visible-xs banner-wrapper" data-banner-xs>
-            <div class="banner-min-height banner gtm-banner" data-banner-code="$footerMobile" data-banner-target="true"></div>
-        </div>
+        $footerBannerGroup
         <div class="clearfix"></div>
     </div>
 </div>
@@ -131,36 +126,16 @@ global $postCount;
 $postCount++;
 if($postCount >= $postsBeforeBanners){
         if( (($postCount % $postsBetweenBanners++) == 0) && ($maxPostsPerPage > $postCount)) {
-        $output = <<<HTML
-        <div class="bonnier-wrapper visible-md-lg" data-banner-md-lg>
-          <div class='banner-min-height banner gtm-banner' id="banner-$desktopMiddle-$postCount" data-banner-code="$desktopMiddle" data-banner-target="true">
-          </div>
-        </div>
-        <div class="bonnier-wrapper visible-md-lg" data-banner-sm>
-          <div class='banner-min-height banner gtm-banner' id="banner-$tabletMiddle-$postCount" data-banner-code="$tabletMiddle" data-banner-target="true">
-          </div>
-        </div>
-        <div class="bonnier-wrapper visible-xs" data-banner-xs>
-          <div class='banner-min-height banner gtm-banner' id="banner-$mobileMiddle-$postCount" data-banner-code="$mobileMiddle" data-banner-target="true">
-          </div>
-        </div>
-HTML;
-
-        echo $output;
+        echo (new \BannerGroup\BannerGroup('Middle Banners',
+            [
+                'banners' => [
+                    'lg'=>$desktopMiddle,
+                    'sm'=>$tabletMiddle,
+                    'xs'=>$mobileMiddle,
+                ]
+            ],'banner_group'))->getHtmlCode();
         }
     }
-}
-
-function add_sticky_banners() {
-$stickyLeft = getOptionOrDefault('sticky-left');
-$stickyRight = getOptionOrDefault('sticky-right');
-global $publicFolder;
-
-$output = <<<HTML
-    <h1 class="text-center">STICKY BANNERS YEAH!</h1>
-HTML;
-
-echo $output;
 }
 
 function add_horseshoe_banners() {
@@ -173,7 +148,7 @@ $desktopTop = getOptionOrDefault('desktop-top');
 $tabletTop = getOptionOrDefault('tablet-top');
 $mobileTop = getOptionOrDefault('mobile-top');
 
-$horseshoeBanners = new BannerGroup\BannerGroup('Horseshoe Banners',[
+echo (new BannerGroup\BannerGroup('Horseshoe Banners',[
     'banners' => [
         'lg'=>$desktopTop,
         'sm'=>$tabletTop,
@@ -187,8 +162,7 @@ $horseshoeBanners = new BannerGroup\BannerGroup('Horseshoe Banners',[
         'side' => $sidebannerRight,
         'sticky' => $stickyRight
     ]
-], 'horseshoe');
-    echo $horseshoeBanners->getHtmlCode();
+], 'horseshoe'))->getHtmlCode();
 }
 
 //settings page
@@ -205,7 +179,6 @@ function mcu_settings_page() {
 
     $middleHook = getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE);
     $horseshoeHook = getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE);
-    $stickyHook = getOptionOrDefault('theme-hook-sticky', HOOK_DEFAULT_STICKY);
     $footerHook = getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER);
 
 
@@ -276,9 +249,6 @@ function mcu_settings_page() {
                 <p style="padding-bottom:20px;">
                     Content units that will be displayed as sticky banners on each side of the page.
                 </p>
-
-                <label for="theme-hook">Sticky Banners Hook</label>
-                <input type="text" class="form-control form-group" placeholder="Hook for outputting the banners" value="$stickyHook" name="theme-hook-sticky" />
 
                 <label for="mobile-middle" class="padding-t">Left</label>
                 <input type="text" class="form-control form-group" placeholder="Sticky Left" value="$stickyLeft" name="sticky-left" />

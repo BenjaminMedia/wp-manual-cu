@@ -65,7 +65,7 @@ HTML;
             if($type == 'banner_group'){
                 $bannerCode ='';
                 foreach ($contentUnits['banners'] as $breakpoint => $cu) {
-                    (isset($cu))?$this->$bannerCode .= $this->generateBannerCode($type,$breakpoint,$cu):'';
+                    (isset($cu))?$bannerCode .= (new Banner($cu,$breakpoint,'banner'))->getCode():'';
                 }
                 return $bannerCode;
             }
