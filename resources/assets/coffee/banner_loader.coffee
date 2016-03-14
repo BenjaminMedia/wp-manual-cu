@@ -21,7 +21,6 @@ class Banners
       @$bannerExtraSmall = $('[data-banner-xs]')
       @$gallery          = $('[data-init="gallery-horizontal"]')
       @uuid              = EAS_uuid() # Emediate function to get unique page id
-      console.log('UUID: '+@uuid)
       @cleanDuplicatedCodes()
 
     if @lazyLoad

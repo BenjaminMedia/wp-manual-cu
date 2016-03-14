@@ -30,7 +30,6 @@
           _this.$bannerExtraSmall = $('[data-banner-xs]');
           _this.$gallery = $('[data-init="gallery-horizontal"]');
           _this.uuid = EAS_uuid();
-          console.log('UUID: ' + _this.uuid);
           return _this.cleanDuplicatedCodes();
         };
       })(this));

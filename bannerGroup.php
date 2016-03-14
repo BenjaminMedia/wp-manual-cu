@@ -22,8 +22,7 @@ Class BannerGroup
     }
     private $bannerGroupTypes = [
         'banner_group',
-        'horseshoe',
-        'wallpaper'
+        'horseshoe'
     ];
 
     private function generateBannerCode($contentUnits,$type){
@@ -40,8 +39,10 @@ Class BannerGroup
                 $leftSticky = (new Banner($contentUnits['left']['sticky'],null,'sidebanner',true))->getCode();
                 $right = (new Banner($contentUnits['right']['side'],null,'sidebanner',false))->getCode();
                 $rightSticky = (new Banner($contentUnits['right']['sticky'],null,'sidebanner',true))->getCode();
+                $wallpaper = (new Banner($contentUnits['wallpaper'],'lg','wallpaper',false))->getCode();
 
                 $horseshoe = <<<HTML
+                    $wallpaper
                     <div class="horseshoe" data-banner-horseshoe>
                       <div class="horseshoe-container">
                         <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
