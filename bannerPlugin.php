@@ -1,14 +1,36 @@
 <?php
 
-namespace Banner;
+namespace BonnierBannerPlugin;
 
-use BannerGroup\BannerGroup;
+use BonnierBannerGroup\BannerGroup;
 
-class bannerPlugin{
+class BannerPlugin{
     private $postCount = 0;
-    public function getPublicFolder()
-    {
-        return plugin_dir_url( __FILE__ ) . 'public';
+
+    public function __construct(){
+        $this->addHooks();
+    }
+
+    private function addHooks(){
+        // Add hooks & filters
+        add_filter('widget_text', 'do_shortcode');
+        add_shortcode('banner', array($this,'bannerShortcode'));
+        add_action('admin_menu', function() {
+            // Add a new submenu item under Settings:
+            add_options_page('Manual Content Units', 'Manage Content Units', 'manage_options', 'mcu_settings', array($this,'settingsPage'));
+        });
+        add_action($this->getOptionOrDefault('horseshoe-theme-hook',$this->getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE)), array($this,'headerBanners'));
+        add_action($this->getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE), array($this,'middleBanners'));
+        add_action($this->getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER), array($this,'footerBanners'));
+        add_action('wp_enqueue_scripts', function() {
+
+            wp_enqueue_style('wa-manual-cu-css', $this->getPublicFolder() . '/css/wa-manual-cu.css');
+            if ($this->getOptionOrDefault('load-eas-functions', false)) {
+                wp_enqueue_script('EAS-functions', $this->getPublicFolder() . '/js/emediate-functions.js');
+            }
+            wp_enqueue_script('EAS-fif', $this->getPublicFolder() . '/js/EAS_fif.js');
+            wp_enqueue_script('wa-manual-cu-js', $this->getPublicFolder() . '/js/banners.js');
+        }, 999);
     }
 
     /**
@@ -34,46 +56,22 @@ class bannerPlugin{
             return $themeHook;
         }
     }
-    public function __construct(){
-        $this->addHooks();
-    }
 
-    private function addHooks(){
-        // Add hooks & filters
-        add_filter('widget_text', 'do_shortcode');
-        add_shortcode('banner', array($this,'bannerShortcode'));
-        add_action('admin_menu', function() {
-            // Add a new submenu under Settings:
-            add_options_page('Manual Content Units', 'Manage Content Units', 'manage_options', 'mcu_settings', array($this,'settingsPage'));
-        });
-        add_action($this->getOptionOrDefault('horseshoe-theme-hook',$this->getOptionOrDefault('theme-hook-horseshoe', HOOK_DEFAULT_HORSESHOE)), array($this,'headerBanners'));
-        add_action($this->getOptionOrDefault('theme-hook-middle', HOOK_DEFAULT_MIDDLE), array($this,'middleBanners'));
-        add_action($this->getOptionOrDefault('theme-hook-footer', HOOK_DEFAULT_FOOTER), array($this,'footerBanners'));
-        add_action('wp_enqueue_scripts', function() {
-
-            wp_enqueue_style('wa-manual-cu-css', $this->getPublicFolder() . '/css/wa-manual-cu.css');
-            if ($this->getOptionOrDefault('load-eas-functions', false)) {
-                wp_enqueue_script('EAS-functions', $this->getPublicFolder() . '/js/emediate-functions.js');
-            }
-            wp_enqueue_script('EAS-fif', $this->getPublicFolder() . '/js/EAS_fif.js');
-            //wp_enqueue_script('wa-manual-cu-js', $this->getPublicFolder() . '/js/wa-manual-cu.js');
-            wp_enqueue_script('wa-manual-cu-js', $this->getPublicFolder() . '/js/banners.js');
-        }, 999);
+    public function getPublicFolder()
+    {
+        return plugin_dir_url( __FILE__ ) . 'public';
     }
 
     public function bannerShortcode($attrs) {
-        $a = shortcode_atts( array(
+        $bannerShortCodeAttributes = shortcode_atts([
             'cu' => NULL,
             'breakpoint' => 'lg',
             'sticky' => FALSE,
             'offset' => NULL,
             'container' => ''
-        ), $attrs );
+        ], $attrs );
 
-        $cu = $a['cu'];
-        $offset = $a['offset'];
-
-        return (new Banner($a['cu'],$a['breakpoint'],'banner',$a['sticky'],$a['offset']));
+        return Banner::htmlCodeFromProps($bannerShortCodeAttributes['cu'],$bannerShortCodeAttributes['breakpoint'],'banner',$bannerShortCodeAttributes['sticky'],$bannerShortCodeAttributes['offset']);
     }
 
     public function headerBanners(){
@@ -87,7 +85,7 @@ class bannerPlugin{
         $mobileTop = $this->getOptionOrDefault('top-mobile',$this->getOptionOrDefault('mobile-top'));
         $wallpaperTop = $this->getOptionOrDefault('wallpaper-takeover-cu');
 
-        echo (new bannerGroup('Horseshoe Banners',[
+        $horseshoeBanner = BannerGroup::htmlCodeFromProps('Horseshoe Banners',[
             'banners' => [
                 'lg'=>$desktopTop,
                 'sm'=>$tabletTop,
@@ -102,7 +100,8 @@ class bannerPlugin{
                 'sticky' => $stickyRight
             ],
             'wallpaper' => $wallpaperTop
-        ], 'horseshoe'))->getHtmlCode();
+        ], 'horseshoe');
+        echo $horseshoeBanner;
     }
 
     public function middleBanners(){
@@ -117,14 +116,14 @@ class bannerPlugin{
         $this->postCount++;
         if($this->postCount >= $postsBeforeBanners){
             if( (($this->postCount % $postsBetweenBanners++) == 0) && ($maxPostsPerPage > $this->postCount)) {
-                echo (new BannerGroup('Middle Banners',
+                echo BannerGroup::htmlCodeFromProps('Middle Banners',
                     [
                         'banners' => [
                             'lg'=>$desktopMiddle,
                             'sm'=>$tabletMiddle,
                             'xs'=>$mobileMiddle,
                         ]
-                    ],'banner_group'))->getHtmlCode();
+                    ],'banner_group');
             }
         }
     }
@@ -134,23 +133,22 @@ class bannerPlugin{
     $footerTablet = $this->getOptionOrDefault('tablet-footer');
     $footerMobile = $this->getOptionOrDefault('mobile-footer');
 
-    $footerBannerGroup = (new BannerGroup('Middle Banners',
+    $footerBannerGroup = BannerGroup::htmlCodeFromProps('Footer Banners',
         [
             'banners' => [
                 'lg'=>$footerDesktop,
                 'sm'=>$footerTablet,
                 'xs'=>$footerMobile,
             ]
-        ],'banner_group'))->getHtmlCode();
+        ],'banner_group');
 
-    $output = <<<HTML
-<div class="row" id="footer-banners">
-    <div class="col-sm-12">
-        $footerBannerGroup
-        <div class="clearfix"></div>
-    </div>
-</div>
-HTML;
+    $output =
+        "<div class='row' id='footer-banners'>
+            <div class='col-sm-12'>
+                $footerBannerGroup
+                <div class='clearfix'></div>
+            </div>
+        </div>";
 
     echo $output;
     }
@@ -271,19 +269,22 @@ HTML;
         echo $form;
     }
 
-    private function generateBannerGroupInputs($namespace,$array){
-        $htmlDropdown = '<div class="input-group">';
-        foreach($array as $key => $value){
-            $htmlDropdown .= '
-                <span class="input-group-addon">
-                    <i class="fa fa-'.strtolower($value).'"></i>
-                </span>
-
-                <input class="form-control" name="'.strtolower($namespace).'-'.strtolower($key).'" placeholder="'.$namespace.' '.$key.'" value="'.$this->getOptionOrDefault(strtolower($namespace).'-'.strtolower($key),$this->getOptionOrDefault(strtolower($key).'-'.strtolower($namespace),NULL)).'" type="text">';
+    private function generateOptionPanel($title,$array){
+        $inputForms = '';
+        foreach($array['forms'] as $form){
+            $inputForms .= $form;
         }
-        $htmlDropdown .= '</div>';
+        $htmlPanel =
+            "<div class='panel panel-info'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'>'.$title.'</h3>
+                </div>
+                <div class='panel-body'>
+                $inputForms
+                </div>
+            </div>";
 
-        return $htmlDropdown;
+        return $htmlPanel;
     }
 
     private function generateBannerGroupForm($title,$namespace,$array){
@@ -302,23 +303,18 @@ HTML;
         return $htmlForm;
     }
 
-    private function generateOptionPanel($title,$array){
+    private function generateBannerGroupInputs($namespace,$array){
+        $htmlDropdown = '<div class="input-group">';
+        foreach($array as $key => $value){
+            $htmlDropdown .= '
+                <span class="input-group-addon">
+                    <i class="fa fa-'.strtolower($value).'"></i>
+                </span>
 
-        $htmlPanel = '<div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">'.$title.'</h3>
-            </div>
+                <input class="form-control" name="'.strtolower($namespace).'-'.strtolower($key).'" placeholder="'.$namespace.' '.$key.'" value="'.$this->getOptionOrDefault(strtolower($namespace).'-'.strtolower($key),$this->getOptionOrDefault(strtolower($key).'-'.strtolower($namespace),NULL)).'" type="text">';
+        }
+        $htmlDropdown .= '</div>';
 
-            <div class="panel-body">
-                ';
-                foreach($array['forms'] as $form){
-                    $htmlPanel .= $form;
-                }
-            $htmlPanel .= '
-                </div>
-            </div>';
-
-        return $htmlPanel;
-
+        return $htmlDropdown;
     }
 }

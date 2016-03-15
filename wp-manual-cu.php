@@ -9,11 +9,11 @@ Author URI: http://www.bonnierpublications.com
 */
 
 include_once('bannerPlugin.php');
-include_once('bannerGroup.php');
+include_once('BannerGroup.php');
 include_once('Banner.php');
 
 const HOOK_DEFAULT_MIDDLE = 'headway_after_entry_content';
 const HOOK_DEFAULT_HORSESHOE = 'headway_page_start';
 const HOOK_DEFAULT_FOOTER = 'headway_footer_close';
 
-$initPlugin = new \Banner\bannerPlugin();
+$initPlugin = new \BonnierBannerPlugin\BannerPlugin();

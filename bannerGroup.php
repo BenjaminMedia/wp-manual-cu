@@ -1,76 +1,80 @@
 <?php
 
-namespace BannerGroup;
+namespace BonnierBannerGroup;
 
-use Banner\Banner;
+use BonnierBannerPlugin\Banner;
 
 Class BannerGroup
 {
     private $html_code;
-    private $name;
-    private $breakpoints;
     private $type;
-
-    public function getHtmlCode(){
-        return $this->html_code;
-    }
-    public function __construct($name,$contentUnits,$type = 'banner_group',$sticky = false)
-    {
-        $this->html_code = '';
-        $this->type= $type;
-        $this->html_code .= $this->generateBannerCode($contentUnits,$type);
-    }
     private $bannerGroupTypes = [
         'banner_group',
         'horseshoe'
     ];
 
-    private function generateBannerCode($contentUnits,$type){
-        if(isset($type,$this->bannerGroupTypes)){
-            if($type == 'horseshoe'){
+    public function __construct($name, $contentUnits, $type = 'banner_group', $sticky = false)
+    {
+        $this->html_code = '';
+        $this->type = $type;
+        $this->html_code .= $this->generateBannerCode($contentUnits, $type);
+    }
+
+    private function generateBannerCode($contentUnits, $type)
+    {
+        if (isset($type, $this->bannerGroupTypes)) {
+            if ($type == 'horseshoe') {
                 $horseshoe = '';
                 $headerBanners = '';
-                foreach($contentUnits['banners'] as $breakpoint => $cu){
-                    $banner = new Banner($cu,$breakpoint,'banner');
-                    $headerBanners .= $banner->getCode();
+                foreach ($contentUnits['banners'] as $breakpoint => $cu) {
+                    $headerBanners .= Banner::htmlCodeFromProps($cu, $breakpoint, 'banner');
                 }
+                $left = Banner::htmlCodeFromProps($contentUnits['left']['side'], null, 'sidebanner', false);
+                $leftSticky = Banner::htmlCodeFromProps($contentUnits['left']['sticky'], null, 'sidebanner', true);
+                $right = Banner::htmlCodeFromProps($contentUnits['right']['side'], null, 'sidebanner', false);
+                $rightSticky = Banner::htmlCodeFromProps($contentUnits['right']['sticky'], null, 'sidebanner', true);
+                $wallpaper = Banner::htmlCodeFromProps($contentUnits['wallpaper'], 'lg', 'wallpaper', false);
 
-                $left = (new Banner($contentUnits['left']['side'],null,'sidebanner',false))->getCode();
-                $leftSticky = (new Banner($contentUnits['left']['sticky'],null,'sidebanner',true))->getCode();
-                $right = (new Banner($contentUnits['right']['side'],null,'sidebanner',false))->getCode();
-                $rightSticky = (new Banner($contentUnits['right']['sticky'],null,'sidebanner',true))->getCode();
-                $wallpaper = (new Banner($contentUnits['wallpaper'],'lg','wallpaper',false))->getCode();
-
-                $horseshoe = <<<HTML
+                $horseshoe =
+                    "
                     $wallpaper
-                    <div class="horseshoe" data-banner-horseshoe>
-                      <div class="horseshoe-container">
-                        <div class="side-banner banner-left visible-md-lg" data-banner-md-lg>
+                    <div class='horseshoe' data-banner-horseshoe>
+                      <div class='horseshoe-container'>
+                        <div class='side-banner banner-left visible-md-lg' data-banner-md-lg>
                           $left
                           $leftSticky
                         </div>
 
-                        <div class="top-banner" data-top-banner>
+                        <div class='top-banner' data-top-banner>
                           $headerBanners
                         </div>
 
-                        <div class="side-banner banner-right visible-md-lg" data-banner-md-lg>
+                        <div class='side-banner banner-right visible-md-lg' data-banner-md-lg>
                           $right
                           $rightSticky
                         </div>
                       </div>
-                    </div>
-HTML;
+                    </div>";
                 return $horseshoe;
             }
-            if($type == 'banner_group'){
-                $bannerCode ='';
+            if ($type == 'banner_group') {
+                $bannerCode = '';
                 foreach ($contentUnits['banners'] as $breakpoint => $cu) {
-                    (isset($cu))?$bannerCode .= (new Banner($cu,$breakpoint,'banner'))->getCode():'';
+                    (isset($cu)) ? $bannerCode .= Banner::htmlCodeFromProps($cu, $breakpoint, 'banner') : '';
                 }
                 return $bannerCode;
             }
         }
         return null;
+    }
+
+    public function getHtmlCode()
+    {
+        return $this->html_code;
+    }
+
+    public static function htmlCodeFromProps($name, $contentUnits, $type = 'banner_group', $sticky = false){
+        $self = new self($name, $contentUnits, $type, $sticky);
+        return $self->getHtmlCode();
     }
 }
